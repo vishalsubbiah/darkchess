@@ -39,23 +39,23 @@ class Board(object):
         board_rep="  A  B  C  D  E  F  G  H \n"
         for i in range(7,-1,-1):
             board_rep+=str(i+1)+" "
-            for j in range(7,-1,-1):
-                    if(i%2==0 and j%2==0):
+            for j in range(0,8,1):
+                    if(i%2==0 and j%2==1):
                         if isinstance(self.board[i][j], Piece):
                             board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
                         else:
                             board_rep+=u'\u2588'+u'\u2588'+u'\u2588'
-                    if(i%2==1 and j%2==0):
+                    if(i%2==1 and j%2==1):
                         if isinstance(self.board[i][j], Piece):
                             board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
                         else:
                             board_rep+="   "
-                    if(i%2==0 and j%2==1):
+                    if(i%2==0 and j%2==0):
                         if isinstance(self.board[i][j], Piece):
                             board_rep+=self.board[i][j].symbol
                         else:
                             board_rep+="   "
-                    if(i%2==1 and j%2==1):
+                    if(i%2==1 and j%2==0):
                         if isinstance(self.board[i][j], Piece):
                             board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
                         else:
@@ -67,6 +67,36 @@ class Board(object):
 
     def view_board(self):
         print(self.__str__())
+
+    def view_board_debug(self):
+        board_rep=""
+        for i in range(0,8,1):
+            for j in range(0,8,1):
+                    if(i%2==1 and j%2==1):
+                        if isinstance(self.board[i][j], Piece):
+                            board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                        else:
+                            board_rep+=u'\u2588'+u'\u2588'+u'\u2588'
+
+                    if(i%2==0 and j%2==1):
+                        if isinstance(self.board[i][j], Piece):
+                            board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                        else:
+                            board_rep+="   "
+
+                    if(i%2==1 and j%2==0):
+                        if isinstance(self.board[i][j], Piece):
+                            board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                        else:
+                            board_rep+="   "
+
+                    if(i%2==0 and j%2==0):
+                        if isinstance(self.board[i][j], Piece):
+                            board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                        else:
+                            board_rep+=u'\u2588'+u'\u2588'+u'\u2588'
+            board_rep+="\n"
+        print(board_rep)
 
     def __repr_(self):
         return self.__str__()
@@ -81,7 +111,6 @@ class Board(object):
     
     def get_moves(self, pos):
         piece = self.board[pos[0]][pos[1]]
-        print(piece)
         return piece.get_moves()
 
     def choose_move(self):
@@ -89,16 +118,15 @@ class Board(object):
         print(team + " to play")
         print("choose a piece (once chosen have to play that piece)")
         pos_str = input("piece's position:").upper()
-        if team =="black":
-            col_dict ={'A':0,'B':1, 'C':2 , 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
-        else:
-            col_dict ={'A':7,'B':6, 'C':5 , 'D':4, 'E':3, 'F':2, 'G':1, 'H':0}
+
+        col_dict ={'A':0,'B':1, 'C':2 , 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
         pos = [int(pos_str[1])-1,col_dict[pos_str[0]]]
-        print(pos)
+        print("piece chosen: "+self.board[pos[0]][pos[1]].symbol)
         moves = self.get_moves(pos)
+
         move_dict = dict()
         for i,move in enumerate(moves):
-            move_dict[i]=move
+            move_dict[i+1]=move
         print(move_dict)
         option=input("move:")
         self.update_board(move_dict[int(option)])
@@ -187,14 +215,18 @@ class Pawn(Piece):
     def get_moves(self):
         pos = self.get_position()
         if self.team == "white":
-            if(pos[1]<6):
+            if pos[0]==1:
+                return [[pos,[pos[0]+1,pos[1]],'base'],[pos,[pos[0]+2,pos[1]],'base']]
+            if(pos[0]<6):
                 return [[pos,[pos[0]+1,pos[1]],'base']]
-            elif(pos[1]==6):
+            elif(pos[0]==6):
                 return [[pos,[pos[0]+1,pos[1]],'evolve']]
         elif self.team == "black":
-            if(pos[1]>1):
+            if(pos[0]==6):
+                return [[pos,[pos[0]-1,pos[1]],'base'],[pos,[pos[0]-2,pos[1]],'base']]
+            if(pos[0]>1):
                 return [[pos,[pos[0]-1,pos[1]],'base']]
-            elif(pos[1]==1):
+            elif(pos[0]==1):
                 return [[pos,[pos[0]-1,pos[1]],'evolve']]
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
