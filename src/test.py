@@ -1,6 +1,8 @@
-from base import Board, Piece
+from base import Board, Pawn
 
-p = Piece([0,0], "white", "rook")
 
 board = Board()
-print(board)
+board.view_board()
+
+board.choose_move()
+board.view_board()
