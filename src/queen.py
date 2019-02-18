@@ -16,5 +16,5 @@ class Queen(Piece):
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
 
-    def get_moves(self):
+    def get_moves(self, board):
         return []

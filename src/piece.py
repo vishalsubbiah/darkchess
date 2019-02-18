@@ -20,7 +20,7 @@ class Piece(object):
     def get_name(self):
         raise NotImplementedError("must be implemented")
 
-    def get_moves(self):
+    def get_moves(self, board):
         raise NotImplementedError("must be implemented")
 
     def get_value(self):

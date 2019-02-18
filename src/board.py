@@ -116,7 +116,7 @@ class Board(object):
     
     def get_moves(self, pos):
         piece = self.board[pos[0]][pos[1]]
-        return piece.get_moves()
+        return piece.get_moves(self.board)
 
     def choose_move(self):
         team = self.get_turn()

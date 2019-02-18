@@ -16,7 +16,7 @@ class Pawn(Piece):
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
     
-    def get_moves(self):
+    def get_moves(self, board):
         pos = self.get_position()
         if self.team == "white":
             if pos[0]==1:
