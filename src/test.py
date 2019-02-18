@@ -1,4 +1,5 @@
-from base import Board, Pawn
+from board import Board
+
 
 
 board = Board()
