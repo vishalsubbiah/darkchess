@@ -17,4 +17,83 @@ class Bishop(Piece):
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
 
     def get_moves(self, board):
-        return []
+        moves=[]
+        pos = self.get_position()
+        x,y = pos
+        if self.team == "white":
+            for i in range(min(x,y)):
+                if board[x-i-1,y-i-1].team == None:
+                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                elif board[x-i-1,y-i-1].team == "black":
+                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(7-x,7-y)):
+                if board[x+i+1,y+i+1].team == None:
+                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                elif board[x+i+1,y+i+1].team == "black":
+                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(x,7-y)):
+                if board[x-i-1,y+i+1].team == None:
+                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                elif board[x-i-1,y+i+1].team == "black":
+                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(7-x,y)):
+                if board[x+i+1,y-i-1].team == None:
+                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                elif board[x+i+1,y-i-1].team == "black":
+                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                    break
+                else:
+                    break
+
+            return moves
+        elif self.team == "black":
+            for i in range(min(x,y)):
+                if board[x-i-1,y-i-1].team == None:
+                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                elif board[x-i-1,y-i-1].team == "white":
+                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(7-x,7-y)):
+                if board[x+i+1,y+i+1].team == None:
+                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                elif board[x+i+1,y+i+1].team == "white":
+                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(x,7-y)):
+                if board[x-i-1,y+i+1].team == None:
+                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                elif board[x-i-1,y+i+1].team == "white":
+                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                    break
+                else:
+                    break
+
+            for i in range(min(7-x,y)):
+                if board[x+i+1,y-i-1].team == None:
+                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                elif board[x+i+1,y-i-1].team == "white":
+                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                    break
+                else:
+                    break
+            return moves
+        else:
+            raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")

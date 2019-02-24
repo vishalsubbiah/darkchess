@@ -27,8 +27,8 @@ class Board(object):
         self.board[0,6] = Knight([0,6], "white")
         self.board[0,2] = Bishop([0,2], "white")
         self.board[0,5] = Bishop([0,5], "white")
-        self.board[0,3] = King([0,3], "white")
-        self.board[0,4] = Queen([0,4], "white")
+        self.board[0,4] = King([0,4], "white")
+        self.board[0,3] = Queen([0,3], "white")
 
         #black pieces
         for j in range(8):
@@ -39,8 +39,8 @@ class Board(object):
         self.board[7,6] = Knight([7,6], "black")
         self.board[7,2] = Bishop([7,2], "black")
         self.board[7,5] = Bishop([7,5], "black")
-        self.board[7,3] = Bishop([7,3], "black")
-        self.board[7,4] = Bishop([7,4], "black")
+        self.board[7,4] = King([7,4], "black")
+        self.board[7,3] = Queen([7,3], "black")
 
         for i in range(2,6):
             for j in range(8):
@@ -72,13 +72,13 @@ class Board(object):
         board_rep=""
         for i in range(0,8,1):
             for j in range(0,8,1):
-                if(i%2==1 and j%2==1):
-                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
                 if(i%2==0 and j%2==1):
+                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                if(i%2==0 and j%2==0):
+                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                if(i%2==1 and j%2==1):
                     board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
                 if(i%2==1 and j%2==0):
-                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
-                if(i%2==0 and j%2==0):
                     board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
 
             board_rep+="\n"
