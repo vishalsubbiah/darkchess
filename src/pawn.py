@@ -7,7 +7,7 @@ class Pawn(Piece):
 
     def get_value(self):
         return 1
-       
+
     def get_symbol(self):
         if self.team == "white":
             return 'wp '
@@ -15,22 +15,69 @@ class Pawn(Piece):
             return 'bp '
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
-    
+
     def get_moves(self, board):
+        moves=[]
         pos = self.get_position()
+        x,y=pos
         if self.team == "white":
-            if pos[0]==1:
-                return [[pos,[pos[0]+1,pos[1]],'base'],[pos,[pos[0]+2,pos[1]],'base']]
-            if(pos[0]<6):
-                return [[pos,[pos[0]+1,pos[1]],'base']]
-            elif(pos[0]==6):
-                return [[pos,[pos[0]+1,pos[1]],'evolve']]
+
+            if x==1:
+                if board[x+1,y].team is None:
+                    moves.append([pos,[x+1,y],'base'])
+                if board[x+2,y].team is None:
+                    moves.append([pos,[x+2,y],'base'])
+                if board[x+1,y-1].team is "black" and y-1>=0:
+                    moves.append([pos,[x+1,y-1],'base'])
+                if board[x+1,y+1].team is "black" and y+1<8:
+                    moves.append([pos,[x+1,y+1],'base'])
+
+                return moves
+            if(x<6):
+                if board[x+1,y].team is None:
+                    moves.append([pos,[x+1,y],'base'])
+                if board[x+1,y-1].team is "black" and y-1>=0:
+                    moves.append([pos,[x+1,y-1],'base'])
+                if board[x+1,y+1].team is "black" and y+1<8:
+                    moves.append([pos,[x+1,y+1],'base'])
+                return moves
+            elif(x==6):
+                if board[x+1,y].team is None:
+                    moves.append([pos,[x+1,y],'evolve'])
+                if board[x+1,y-1].team is "black" and y-1>=0:
+                    moves.append([pos,[x+1,y-1],'evolve'])
+                if board[x+1,y+1].team is "black" and y+1<8:
+                    moves.append([pos,[x+1,y+1],'evolve'])
+                return moves
+
         elif self.team == "black":
-            if(pos[0]==6):
-                return [[pos,[pos[0]-1,pos[1]],'base'],[pos,[pos[0]-2,pos[1]],'base']]
-            if(pos[0]>1):
-                return [[pos,[pos[0]-1,pos[1]],'base']]
-            elif(pos[0]==1):
-                return [[pos,[pos[0]-1,pos[1]],'evolve']]
+
+            if(x==6):
+                if board[x-1,y].team is None:
+                    moves.append([pos,[x-1,y],'base'])
+                if board[x-2,y].team is None:
+                    moves.append([pos,[x-2,y],'base'])
+                if board[x-1,y-1].team is "white" and y-1>=0:
+                    moves.append([pos,[x-1,y-1],'base'])
+                if board[x-1,y+1].team is "white" and y+1<8:
+                    moves.append([pos,[x-1,y+1],'base'])
+                return moves
+
+            if(x>1):
+                if board[x-1,y].team is None:
+                    moves.append([pos,[x-1,y],'base'])
+                if board[x-1,y-1].team is "white" and y-1>=0:
+                    moves.append([pos,[x-1,y-1],'base'])
+                if board[x-1,y+1].team is "white" and y+1<8:
+                    moves.append([pos,[x-1,y+1],'base'])
+                return moves
+            elif(x==1):
+                if board[x-1,y].team is None:
+                    moves.append([pos,[x-1,y],'evolve'])
+                if board[x-1,y-1].team is "white" and y-1>=0:
+                    moves.append([pos,[x-1,y-1],'evolve'])
+                if board[x-1,y+1].team is "white" and y+1<8:
+                    moves.append([pos,[x-1,y+1],'evolve'])
+                return moves
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")

@@ -8,7 +8,7 @@ class King(Piece):
 
     def get_value(self):
         return np.inf
-       
+
     def get_symbol(self):
         if self.team == "white":
             return 'wK '
@@ -16,6 +16,13 @@ class King(Piece):
             return 'bK '
         else:
             raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
-    
+
     def get_moves(self, board):
-        return []
+        moves=[]
+        pos = self.get_position()
+        if self.team == "white":
+            return moves
+        elif self.team == "black":
+            return moves
+        else:
+            raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")

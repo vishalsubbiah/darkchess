@@ -7,7 +7,7 @@ class Bishop(Piece):
 
     def get_value(self):
         return 3
-       
+
     def get_symbol(self):
         if self.team == "white":
             return 'wb '
