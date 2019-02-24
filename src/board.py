@@ -114,7 +114,7 @@ class Board(object):
                 move_dict = dict()
                 for i,move in enumerate(moves):
                     move_dict[i+1]=move
-                print(move_dict)
+                print(self.translate(move_dict))
                 option=input("move:")
                 self.update_board(move_dict[int(option)])
             else:
@@ -154,4 +154,15 @@ class Board(object):
 
         else:
             raise ValueError("this action:"+key_word+" doesn't exist in the realm of this game")
+
+    def translate(self, move_dict):
+        new_dict={}
+        revcol_dict ={0:'A',1:'B', 2:'C' , 3:'D', 4:'E', 5:'F', 6:'G', 7:'H'}
+        for key, val in move_dict.items():
+            start = val[0]
+            end = val[1]
+            new_start = revcol_dict[start[1]]+ str(start[0]+1)
+            new_end = revcol_dict[end[1]]+ str(end[0]+1)
+            new_dict[key]=[new_start,new_end]
+        return new_dict
 
