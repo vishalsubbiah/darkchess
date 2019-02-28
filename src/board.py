@@ -111,6 +111,9 @@ class Board(object):
             print("piece chosen: "+self.board[pos[0]][pos[1]].symbol)
             if self.board[pos[0],pos[1]].team == team:
                 moves = self.get_moves(pos)
+                if moves == []:
+                    print("no moves available for that piece")
+                    self.choose_move()
                 move_dict = dict()
                 for i,move in enumerate(moves):
                     move_dict[i+1]=move
@@ -123,6 +126,7 @@ class Board(object):
         else:
             print("chose a tile with no piece. choose again")
             self.choose_move()
+
 
 
     def update_board(self, move):
@@ -166,3 +170,36 @@ class Board(object):
             new_dict[key]=[new_start,new_end]
         return new_dict
 
+    def all_moves_minus_king(self, team):
+        moves = []
+        for i in range(8):
+            for j in range(8):
+                if self.board[i,j].team==team and self.board[i,j].symbol is not team[0]+'K ':
+                    piece = self.board[i,j]
+                    moves+=piece.get_moves(self.board)
+        return moves
+
+    def is_check(self, team):
+        king = None
+        if team=="white":
+            for i in range(8):
+                for j in range(8):
+                    if self.board[i,j].symbol=="wK ":
+                        king=self.board[i,j]
+                        break
+            opp_pos = king.extract_endpos_moves(self.all_moves_minus_king("black"))
+            if king.get_position() in opp_pos:
+                print("white king in check")
+                return 1
+            return 0
+        if team=="black":
+            for i in range(8):
+                for j in range(8):
+                    if self.board[i,j].symbol=="bK ":
+                        king=self.board[i,j]
+                        break
+            opp_pos = king.extract_endpos_moves(self.all_moves_minus_king("white"))
+            if king.get_position() in opp_pos:
+                print("white king in check")
+                return 1
+            return 0
