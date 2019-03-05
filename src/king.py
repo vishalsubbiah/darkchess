@@ -15,8 +15,10 @@ class King(Piece):
         elif self.team == "black":
             return 'bK '
         else:
-            raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
+            raise ValueError("this team:" +
+                             self.team +
+                             " doesn't exist in the realm of this game")
 
     def get_moves(self, board):
-        moves=[]
+        moves = []
         return moves
