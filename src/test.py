@@ -5,6 +5,6 @@ board = Board()
 game = GameEngine(board)
 
 while True:
-    game.board.view_board_debug()
-    game.board.view_board()
+    game.Board.view_board_debug()
+    game.Board.view_board()
     game.choose_move()

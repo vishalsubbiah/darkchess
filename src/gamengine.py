@@ -2,10 +2,10 @@ from piece import Piece
 
 class GameEngine():
 
-    def __init__(self, board):
+    def __init__(self, Board):
         self.move_counter = 0
-        self.board = board
-        self.prev_board = board
+        self.Board = Board
+        self.prev_Board = Board
 
     def get_turn(self):
         if self.move_counter%2==0:
@@ -16,8 +16,8 @@ class GameEngine():
             return "black"
 
     def get_moves(self, pos):
-        piece = self.board[pos[0],pos[1]]
-        return piece.get_moves(self.board)
+        piece = self.Board.board[pos[0],pos[1]]
+        return piece.get_moves(self.Board.board)
 
     def choose_move(self):
         team = self.get_turn()
@@ -27,9 +27,9 @@ class GameEngine():
 
         col_dict ={'A':0,'B':1, 'C':2 , 'D':3, 'E':4, 'F':5, 'G':6, 'H':7}
         pos = [int(pos_str[1])-1,col_dict[pos_str[0]]]
-        if isinstance(self.board[pos[0],pos[1]],Piece):
-            print("piece chosen: "+self.board[pos[0]][pos[1]].symbol)
-            if self.board[pos[0],pos[1]].team == team:
+        if isinstance(self.Board.board[pos[0],pos[1]],Piece):
+            print("piece chosen: "+self.Board.board[pos[0]][pos[1]].symbol)
+            if self.Board.board[pos[0],pos[1]].team == team:
                 moves = self.get_moves(pos)
                 if moves == []:
                     print("no moves available for that piece")
@@ -39,8 +39,9 @@ class GameEngine():
                     move_dict[i+1]=move
                 print(self.translate(move_dict))
                 option=input("move:")
-                self.prev_board = self.board
-                self.board.update_board(move_dict[int(option)])
+                self.prev_Board = self.Board
+                self.Board.update_board(move_dict[int(option)], team)
+                self.move_counter+=1
             else:
                 print("wrong team tried to play. choose again")
                 self.choose_move()
@@ -49,7 +50,7 @@ class GameEngine():
             self.choose_move()
 
     def undo_move(self):
-        self.board = self.prev_board
+        self.Board = self.prev_Board
         self.move_counter -= 1
 
     def translate(self, move_dict):

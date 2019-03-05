@@ -14,7 +14,7 @@ class Board(object):
 
     def __init__(self, starting_board=None):
         self.board = np.empty((8,8),dtype=Piece)
-        if starting_board is not None:
+        if starting_board is None:
             self._start_pos()
         else:
             self.board = starting_board
