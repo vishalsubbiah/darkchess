@@ -23,31 +23,31 @@ class Board(object):
     def _start_pos(self):
         # white pieces
         for j in range(8):
-            self.board[1,j] = Pawn([1,j], "white")
-        self.board[0,0] = Rook([0,0], "white")
-        self.board[0,7] = Rook([0,7], "white")
-        self.board[0,1] = Knight([0,1], "white")
-        self.board[0,6] = Knight([0,6], "white")
-        self.board[0,2] = Bishop([0,2], "white")
-        self.board[0,5] = Bishop([0,5], "white")
-        self.board[0,4] = King([0,4], "white")
-        self.board[0,3] = Queen([0,3], "white")
+            self.board[1,j] = Pawn((1,j), "white")
+        self.board[0,0] = Rook((0,0), "white")
+        self.board[0,7] = Rook((0,7), "white")
+        self.board[0,1] = Knight((0,1), "white")
+        self.board[0,6] = Knight((0,6), "white")
+        self.board[0,2] = Bishop((0,2), "white")
+        self.board[0,5] = Bishop((0,5), "white")
+        self.board[0,4] = King((0,4), "white")
+        self.board[0,3] = Queen((0,3), "white")
 
         #black pieces
         for j in range(8):
-            self.board[6,j] = Pawn([6,j], "black")
-        self.board[7,0] = Rook([7,0], "black")
-        self.board[7,7] = Rook([7,7], "black")
-        self.board[7,1] = Knight([7,1], "black")
-        self.board[7,6] = Knight([7,6], "black")
-        self.board[7,2] = Bishop([7,2], "black")
-        self.board[7,5] = Bishop([7,5], "black")
-        self.board[7,4] = King([7,4], "black")
-        self.board[7,3] = Queen([7,3], "black")
+            self.board[6,j] = Pawn((6,j), "black")
+        self.board[7,0] = Rook((7,0), "black")
+        self.board[7,7] = Rook((7,7), "black")
+        self.board[7,1] = Knight((7,1), "black")
+        self.board[7,6] = Knight((7,6), "black")
+        self.board[7,2] = Bishop((7,2), "black")
+        self.board[7,5] = Bishop((7,5), "black")
+        self.board[7,4] = King((7,4), "black")
+        self.board[7,3] = Queen((7,3), "black")
 
         for i in range(2,6):
             for j in range(8):
-                self.board[i,j] = Dummy([i,j], None)
+                self.board[i,j] = Dummy((i,j), None)
 
     def __str__(self):
         board_rep="  A  B  C  D  E  F  G  H \n"
@@ -55,13 +55,13 @@ class Board(object):
             board_rep+=str(i+1)+" "
             for j in range(0,8,1):
                 if(i%2==0 and j%2==1):
-                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+= bg.white + fg.black + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==1 and j%2==1):
-                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+=bg.black + fg.white + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==0 and j%2==0):
-                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+=bg.black + fg.white + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==1 and j%2==0):
-                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+= bg.white + fg.black + self.board[i,j].symbol + fg.rs + bg.rs
 
             board_rep+=" "+str(i+1)
             board_rep+="\n"
@@ -76,13 +76,13 @@ class Board(object):
         for i in range(0,8,1):
             for j in range(0,8,1):
                 if(i%2==0 and j%2==1):
-                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+= bg.white + fg.black + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==0 and j%2==0):
-                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+=bg.black + fg.white + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==1 and j%2==1):
-                    board_rep+=bg.black + fg.white + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+=bg.black + fg.white + self.board[i,j].symbol + fg.rs + bg.rs
                 if(i%2==1 and j%2==0):
-                    board_rep+= bg.white + fg.black + self.board[i][j].symbol + fg.rs + bg.rs
+                    board_rep+= bg.white + fg.black + self.board[i,j].symbol + fg.rs + bg.rs
 
             board_rep+="\n"
         print(board_rep)
@@ -132,7 +132,7 @@ class Board(object):
 
 
 
-    def update_board(self, move):
+    def update_board(self, move, team):
         start = move[0]
         end =  move[1]
         key_word = move[2] # 'enpasse' or 'castling' or 'evolve' or 'base'
@@ -153,7 +153,6 @@ class Board(object):
             warnings.warn("castling not implemented yet")
 
         elif key_word=="evolve":
-            team = self.get_turn()
             self.board[end[0],end[1]]=Queen(end,team)
             self.board[start[0],start[1]]=Dummy([start[0],start[1]])
             self.move_counter+=1

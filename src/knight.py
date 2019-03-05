@@ -23,65 +23,65 @@ class Knight(Piece):
         if self.team == "white":
             if x-2>=0 and y-1>=0:
                 if board[x-2,y-1].team is not "white":
-                    moves.append([pos,[x-2,y-1],"base"])
+                    moves.append([pos,(x-2,y-1),"base"])
 
             if x-2>=0 and y+1<=7:
                 if board[x-2,y+1].team is not "white":
-                    moves.append([pos,[x-2,y+1],"base"])
+                    moves.append([pos,(x-2,y+1),"base"])
 
             if x-1>=0 and y-2>=0:
                 if board[x-1,y-2].team is not "white":
-                    moves.append([pos,[x-1,y-2],"base"])
+                    moves.append([pos,(x-1,y-2),"base"])
 
             if x+1<=7 and y-2>=0:
                 if board[x+1,y-2].team is not "white":
-                    moves.append([pos,[x+1,y-2],"base"])
+                    moves.append([pos,(x+1,y-2),"base"])
             if x+2<=7 and y-1>=0:
                 if board[x+2,y-1].team is not "white":
-                    moves.append([pos,[x+2,y-1],"base"])
+                    moves.append([pos,(x+2,y-1),"base"])
 
             if x+2<=7 and y+1<=7:
                 if board[x+2,y+1].team is not "white":
-                    moves.append([pos,[x+2,y+1],"base"])
+                    moves.append([pos,(x+2,y+1),"base"])
 
             if x+1<=7 and y+2<=7:
                 if board[x+1,y+2].team is not "white":
-                    moves.append([pos,[x+1,y+2],"base"])
+                    moves.append([pos,(x+1,y+2),"base"])
             if x-1>=0 and y+2<=7:
                 if board[x-1,y+2].team is not "white":
-                    moves.append([pos,[x-1,y+2],"base"])
+                    moves.append([pos,(x-1,y+2),"base"])
 
             return moves
         elif self.team == "black":
             if x-2>=0 and y-1>=0:
                 if board[x-2,y-1].team is not "black":
-                    moves.append([pos,[x-2,y-1],"base"])
+                    moves.append([pos,(x-2,y-1),"base"])
 
             if x-2>=0 and y+1<=7:
                 if board[x-2,y+1].team is not "black":
-                    moves.append([pos,[x-2,y+1],"base"])
+                    moves.append([pos,(x-2,y+1),"base"])
 
             if x-1>=0 and y-2>=0:
                 if board[x-1,y-2].team is not "black":
-                    moves.append([pos,[x-1,y-2],"base"])
+                    moves.append([pos,(x-1,y-2),"base"])
 
             if x+1<=7 and y-2>=0:
                 if board[x+1,y-2].team is not "black":
-                    moves.append([pos,[x+1,y-2],"base"])
+                    moves.append([pos,(x+1,y-2),"base"])
             if x+2<=7 and y-1>=0:
                 if board[x+2,y-1].team is not "black":
-                    moves.append([pos,[x+2,y-1],"base"])
+                    moves.append([pos,(x+2,y-1),"base"])
 
             if x+2<=7 and y+1<=7:
                 if board[x+2,y+1].team is not "black":
-                    moves.append([pos,[x+2,y+1],"base"])
+                    moves.append([pos,(x+2,y+1),"base"])
 
             if x+1<=7 and y+2<=7:
                 if board[x+1,y+2].team is not "black":
-                    moves.append([pos,[x+1,y+2],"base"])
+                    moves.append([pos,(x+1,y+2),"base"])
             if x-1>=0 and y+2<=7:
                 if board[x-1,y+2].team is not "black":
-                    moves.append([pos,[x-1,y+2],"base"])
+                    moves.append([pos,(x-1,y+2),"base"])
 
             return moves
         else:
