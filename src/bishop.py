@@ -22,37 +22,41 @@ class Bishop(Piece):
         x,y = pos
         if self.team == "white":
             for i in range(min(x,y)):
-                if board[x-i-1,y-i-1].team == None:
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
-                elif board[x-i-1,y-i-1].team == "black":
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                new_pos = (x-i-1,y-i-1)
+                if board[new_pos].team == None:
+                    moves.append([pos, new_pos,'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(7-x,7-y)):
-                if board[x+i+1,y+i+1].team == None:
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
-                elif board[x+i+1,y+i+1].team == "black":
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                new_pos = (x+i+1,y+i+1)
+                if board[new_pos].team == None:
+                    moves.append([pos, new_pos,'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(x,7-y)):
-                if board[x-i-1,y+i+1].team == None:
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
-                elif board[x-i-1,y+i+1].team == "black":
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                new_pos = (x-i-1,y+i+1)
+                if board[new_pos].team == None:
+                    moves.append([pos, new_pos,'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(7-x,y)):
-                if board[x+i+1,y-i-1].team == None:
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
-                elif board[x+i+1,y-i-1].team == "black":
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                new_pos =  (x+i+1,y-i-1)
+                if board[new_pos].team == None:
+                    moves.append([pos,new_pos,'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
@@ -60,37 +64,41 @@ class Bishop(Piece):
             return moves
         elif self.team == "black":
             for i in range(min(x,y)):
-                if board[x-i-1,y-i-1].team == None:
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
-                elif board[x-i-1,y-i-1].team == "white":
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
+                new_pos = (x-i-1,y-i-1)
+                if board[new_pos].team == None:
+                    moves.append([pos,new_pos,'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(7-x,7-y)):
-                if board[x+i+1,y+i+1].team == None:
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
-                elif board[x+i+1,y+i+1].team == "white":
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
+                new_pos = (x+i+1,y+i+1)
+                if board[new_pos].team == None:
+                    moves.append([pos,new_pos,'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(x,7-y)):
-                if board[x-i-1,y+i+1].team == None:
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
-                elif board[x-i-1,y+i+1].team == "white":
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
+                new_pos = (x-i-1,y+i+1)
+                if board[new_pos].team == None:
+                    moves.append([pos,new_pos,'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
 
             for i in range(min(7-x,y)):
-                if board[x+i+1,y-i-1].team == None:
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
-                elif board[x+i+1,y-i-1].team == "white":
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
+                new_pos = (x+i+1,y-i-1)
+                if board[new_pos].team == None:
+                    moves.append([pos,new_pos,'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos,new_pos,'base'])
                     break
                 else:
                     break
