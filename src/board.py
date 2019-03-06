@@ -1,12 +1,12 @@
 from sty import fg, bg, rs
-from piece import Piece
-from pawn import Pawn
-from rook import Rook
-from bishop import Bishop
-from knight import Knight
-from queen import Queen
-from king import King
-from dummy_piece import Dummy
+from darkchess.src.piece import Piece
+from darkchess.src.pawn import Pawn
+from darkchess.src.rook import Rook
+from darkchess.src.bishop import Bishop
+from darkchess.src.knight import Knight
+from darkchess.src.queen import Queen
+from darkchess.src.king import King
+from darkchess.src.dummy_piece import Dummy
 import warnings
 import numpy as np
 

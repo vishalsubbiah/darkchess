@@ -1,61 +1,75 @@
-from piece import Piece
+from darkchess.src.piece import Piece
 
 
 class GameEngine():
 
-    def __init__(self, Board):
+    def __init__(self, Board, player1=None, player2=None):
         self.move_counter = 0
         self.Board = Board
         self.prev_Board = Board
+        if player1 is None:
+            player1 = "human"
+        if player2 is None:
+            player2 = "human"
+        self.player1 = player1  # plays as white
+        self.player2 = player2  # plays as black
 
     def get_turn(self):
         if self.move_counter % 2 == 0:
             print("white's turn")
-            return "white"
+            return "white", self.player1
         else:
             print("black's turn")
-            return "black"
+            return "black", self.player2
 
     def get_moves(self, pos):
         piece = self.Board.board[pos[0], pos[1]]
         return piece.get_moves(self.Board.board)
 
     def choose_move(self):
-        team = self.get_turn()
+        team, player = self.get_turn()
         print(team + " to play")
         print("choose a piece (once chosen have to play that piece)")
-        pos_str = input("piece's position:").upper()
+        if player == "human":
+            pos_str = input("piece's position:").upper()
 
-        col_dict = {'A': 0, 'B': 1, 'C': 2,
-                    'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
-        pos = [int(pos_str[1])-1, col_dict[pos_str[0]]]
-        if isinstance(self.Board.board[pos[0], pos[1]], Piece):
-            print("piece chosen: "+self.Board.board[pos[0]][pos[1]].symbol)
-            if self.Board.board[pos[0], pos[1]].team == team:
-                moves = self.get_moves(pos)
-                if moves == []:
-                    print("no moves available for that piece")
+            col_dict = {'A': 0, 'B': 1, 'C': 2,
+                        'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
+            pos = [int(pos_str[1])-1, col_dict[pos_str[0]]]
+            if isinstance(self.Board.board[pos[0], pos[1]], Piece):
+                print("piece chosen: "+self.Board.board[pos[0]][pos[1]].symbol)
+                if self.Board.board[pos[0], pos[1]].team == team:
+                    moves = self.get_moves(pos)
+                    if moves == []:
+                        print("no moves available for that piece")
+                        self.choose_move()
+                    move_dict = dict()
+                    for i, move in enumerate(moves):
+                        move_dict[i+1] = move
+                    print(self.translate(move_dict))
+                    option = input("move:")
+                    self.prev_Board = self.Board
+                    self.Board.update_board(move_dict[int(option)], team)
+                    self.move_counter += 1
+                else:
+                    print("wrong team tried to play. choose again")
                     self.choose_move()
-                move_dict = dict()
-                for i, move in enumerate(moves):
-                    move_dict[i+1] = move
-                print(self.translate(move_dict))
-                option = input("move:")
-                self.prev_Board = self.Board
-                self.Board.update_board(move_dict[int(option)], team)
-                self.move_counter += 1
             else:
-                print("wrong team tried to play. choose again")
+                print("chose a tile with no piece. choose again")
                 self.choose_move()
+        elif player == "computer":
+            pass
         else:
-            print("chose a tile with no piece. choose again")
-            self.choose_move()
+            raise ValueError("this player:" +
+                             player +
+                             " doesn't exist in the realm of this game")
 
     def undo_move(self):
         self.Board = self.prev_Board
         self.move_counter -= 1
 
-    def translate(self, move_dict):
+    @staticmethod
+    def translate(move_dict):
         new_dict = {}
         revcol_dict = {0: 'A', 1: 'B', 2: 'C',
                        3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H'}
