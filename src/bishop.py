@@ -14,86 +14,98 @@ class Bishop(Piece):
         elif self.team == "black":
             return 'bb '
         else:
-            raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
+            raise ValueError("this team:" +
+                             self.team +
+                             " doesn't exist in the realm of this game")
 
     def get_moves(self, board):
-        moves=[]
+        moves = []
         pos = self.get_position()
-        x,y = pos
+        x, y = pos
         if self.team == "white":
-            for i in range(min(x,y)):
-                if board[x-i-1,y-i-1].team == None:
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
-                elif board[x-i-1,y-i-1].team == "black":
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
+            for i in range(min(x, y)):
+                new_pos = (x-i-1, y-i-1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(7-x,7-y)):
-                if board[x+i+1,y+i+1].team == None:
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
-                elif board[x+i+1,y+i+1].team == "black":
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
+            for i in range(min(7-x, 7-y)):
+                new_pos = (x+i+1, y+i+1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(x,7-y)):
-                if board[x-i-1,y+i+1].team == None:
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
-                elif board[x-i-1,y+i+1].team == "black":
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
+            for i in range(min(x, 7-y)):
+                new_pos = (x-i-1, y+i+1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(7-x,y)):
-                if board[x+i+1,y-i-1].team == None:
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
-                elif board[x+i+1,y-i-1].team == "black":
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
+            for i in range(min(7-x, y)):
+                new_pos = (x+i+1, y-i-1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "black":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
             return moves
         elif self.team == "black":
-            for i in range(min(x,y)):
-                if board[x-i-1,y-i-1].team == None:
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
-                elif board[x-i-1,y-i-1].team == "white":
-                    moves.append([pos,[x-i-1,y-i-1],'base'])
+            for i in range(min(x, y)):
+                new_pos = (x-i-1, y-i-1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(7-x,7-y)):
-                if board[x+i+1,y+i+1].team == None:
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
-                elif board[x+i+1,y+i+1].team == "white":
-                    moves.append([pos,[x+i+1,y+i+1],'base'])
+            for i in range(min(7-x, 7-y)):
+                new_pos = (x+i+1, y+i+1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(x,7-y)):
-                if board[x-i-1,y+i+1].team == None:
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
-                elif board[x-i-1,y+i+1].team == "white":
-                    moves.append([pos,[x-i-1,y+i+1],'base'])
+            for i in range(min(x, 7-y)):
+                new_pos = (x-i-1, y+i+1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
 
-            for i in range(min(7-x,y)):
-                if board[x+i+1,y-i-1].team == None:
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
-                elif board[x+i+1,y-i-1].team == "white":
-                    moves.append([pos,[x+i+1,y-i-1],'base'])
+            for i in range(min(7-x, y)):
+                new_pos = (x+i+1, y-i-1)
+                if board[new_pos].team is None:
+                    moves.append([pos, new_pos, 'base'])
+                elif board[new_pos].team == "white":
+                    moves.append([pos, new_pos, 'base'])
                     break
                 else:
                     break
             return moves
         else:
-            raise ValueError("this team:"+self.team+" doesn't exist in the realm of this game")
+            raise ValueError("this team:" +
+                             self.team +
+                             " doesn't exist in the realm of this game")

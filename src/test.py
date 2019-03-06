@@ -1,9 +1,10 @@
 from board import Board
-
-
+from gamengine import GameEngine
 
 board = Board()
+game = GameEngine(board)
+
 while True:
-    board.view_board_debug()
-    board.view_board()
-    board.choose_move()
+    game.Board.view_board_debug()
+    game.Board.view_board()
+    game.choose_move()
