@@ -180,14 +180,14 @@ class Board(object):
     #         new_dict[key]=[new_start,new_end]
     #     return new_dict
 
-    def all_moves_minus_king(self, team):
-        moves = []
-        for i in range(8):
-            for j in range(8):
-                if self.board[i, j].team == team and self.board[i, j].symbol is not team[0]+'K ':
-                    piece = self.board[i, j]
-                    moves += piece.get_moves(self.board)
-        return moves
+    # def all_moves_minus_king(self, team):
+    #     moves = []
+    #     for i in range(8):
+    #         for j in range(8):
+    #             if self.board[i, j].team == team and self.board[i, j].symbol is not team[0]+'K ':
+    #                 piece = self.board[i, j]
+    #                 moves += piece.get_moves(self.board)
+    #     return moves
 
     # def is_check(self, team):
     #     king = None
