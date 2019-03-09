@@ -1,5 +1,5 @@
-from darkchess.src.board import Board
-from darkchess.src.gamengine import GameEngine
+from board import Board
+from gamengine import GameEngine
 
 board = Board()
 game = GameEngine(board)

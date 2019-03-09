@@ -1,4 +1,4 @@
-from piece import Piece
+from darkchess.src.piece import Piece
 
 
 class Queen(Piece):
@@ -43,7 +43,6 @@ class Queen(Piece):
                 if board[i, y].team == None:
                     moves.append([pos, (i, y), 'base'])
                 elif board[i, y].team == "black":
-                    print("here")
                     moves.append([pos, (i, y), 'base'])
                     break
                 else:
@@ -52,7 +51,6 @@ class Queen(Piece):
                 if board[i, y].team == None:
                     moves.append([pos, (i, y), 'base'])
                 elif board[i, y].team == "black":
-                    print("here")
                     moves.append([pos, (i, y), 'base'])
                     break
                 else:

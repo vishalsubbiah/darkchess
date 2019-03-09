@@ -1,4 +1,4 @@
-from piece import Piece
+from darkchess.src.piece import Piece
 
 
 class Knight(Piece):
