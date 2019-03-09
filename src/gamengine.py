@@ -62,25 +62,6 @@ class GameEngine():
         elif player == "computer":
             if move is None:
                 raise ValueError("Move is None, cant be in computer mode")
-            # pos_str = move[0].upper()
-            # final_pos_str = move[1].upper()
-            # col_dict = {'A': 0, 'B': 1, 'C': 2,
-            #             'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
-            # pos = (int(pos_str[1])-1, col_dict[pos_str[0]])
-            # final_pos = (int(final_pos_str[1])-1, col_dict[final_pos_str[0]])
-            # if isinstance(self.Board.board[pos[0], pos[1]], Piece):
-            #     print("piece chosen: "+self.Board.board[pos[0], pos[1]].symbol)
-            #     if self.Board.board[pos[0], pos[1]].team == team:
-            #         self.prev_Board = self.Board
-            #         self.Board.update_board([pos,final_pos,move[2].lower()], team)
-            #         self.move_counter += 1
-            #     else:
-            #         print("wrong team tried to play. choose again")
-            #         self.choose_move(move)
-            # else:
-            #     print("chose a tile with no piece. choose again")
-            #     self.choose_move(move)
-            # pass
             self.prev_Board = self.Board
             self.Board.update_board(move, team)
             self.move_counter += 1

@@ -7,24 +7,27 @@ from darkchess.src.gamengine import GameEngine
 from darkchess.src.utils import clean_board
 import os
 
-def test_pawn_moves():
-    board = clean_board()
-    for j in range(8):
-            board[1, j] = Pawn((1, j), "white")
-    for j in range(8):
-            board[6, j] = Pawn((6, j), "black")
-    pawn_board = Board(board)
-    game = GameEngine(pawn_board, player1="computer", player2="computer")
-    for i in range(10):
-        print(i+1)
-        while True:
-            game = GameEngine(pawn_board, player1="computer", player2="computer")
+def no_pawns(board):
+    for i in range(8):
+        for j in range(8):
+            if board[i,j].symbol[1]=='p':
+                return False
+    return True
 
+def test_pawn_moves():
+    num_games = 100
+    for i in range(num_games):
+        print("game",i+1)
+        board = clean_board()
+        for j in range(8):
+            board[1, j] = Pawn((1, j), "white")
+        for j in range(8):
+            board[6, j] = Pawn((6, j), "black")
+        pawn_board = Board(board)
+        game = GameEngine(pawn_board, player1="computer", player2="computer")
+        while True:
             moves = game.all_moves()
-            if len(moves)==0:
+            if len(moves) == 0 or no_pawns(game.Board.board):
                 break
-            print(moves)
-            game.Board.view_board()
-            game.choose_move(moves[0])
-            game.Board.view_board()
-            input()
+            rand_int = np.random.randint(len(moves))
+            game.choose_move(moves[rand_int])
