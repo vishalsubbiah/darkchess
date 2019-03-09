@@ -9,7 +9,7 @@ from darkchess.src.king import King
 from darkchess.src.dummy_piece import Dummy
 import warnings
 import numpy as np
-
+from darkchess.src.utils import clean_board
 
 class Board(object):
 
@@ -23,6 +23,7 @@ class Board(object):
 
     def _start_pos(self):
         # white pieces
+        self.board = clean_board()
         for j in range(8):
             self.board[1, j] = Pawn((1, j), "white")
         self.board[0, 0] = Rook((0, 0), "white")
@@ -46,9 +47,9 @@ class Board(object):
         self.board[7, 4] = King((7, 4), "black")
         self.board[7, 3] = Queen((7, 3), "black")
 
-        for i in range(2, 6):
-            for j in range(8):
-                self.board[i, j] = Dummy((i, j), None)
+        # for i in range(2, 6):
+        #     for j in range(8):
+        #         self.board[i, j] = Dummy((i, j), None)
 
     def __str__(self):
         board_rep = "  A  B  C  D  E  F  G  H \n"

@@ -26,23 +26,25 @@ class GameEngine():
         piece = self.Board.board[pos[0], pos[1]]
         return piece.get_moves(self.Board.board)
 
-    def choose_move(self):
+    def choose_move(self, move=None):
         team, player = self.get_turn()
         print(team + " to play")
-        print("choose a piece (once chosen have to play that piece)")
         if player == "human":
+            print("choose a piece (once chosen have to play that piece)")
+            if move is not None:
+                raise ValueError("Move is not None, cant be in human mode")
             pos_str = input("piece's position:").upper()
 
             col_dict = {'A': 0, 'B': 1, 'C': 2,
                         'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
-            pos = [int(pos_str[1])-1, col_dict[pos_str[0]]]
+            pos = (int(pos_str[1])-1, col_dict[pos_str[0]])
             if isinstance(self.Board.board[pos[0], pos[1]], Piece):
-                print("piece chosen: "+self.Board.board[pos[0]][pos[1]].symbol)
+                print("piece chosen: "+self.Board.board[pos[0], pos[1]].symbol)
                 if self.Board.board[pos[0], pos[1]].team == team:
                     moves = self.get_moves(pos)
                     if moves == []:
                         print("no moves available for that piece")
-                        self.choose_move()
+                        self.choose_move(move)
                     move_dict = dict()
                     for i, move in enumerate(moves):
                         move_dict[i+1] = move
@@ -53,12 +55,35 @@ class GameEngine():
                     self.move_counter += 1
                 else:
                     print("wrong team tried to play. choose again")
-                    self.choose_move()
+                    self.choose_move(move)
             else:
                 print("chose a tile with no piece. choose again")
-                self.choose_move()
+                self.choose_move(move)
         elif player == "computer":
-            pass
+            if move is None:
+                raise ValueError("Move is None, cant be in computer mode")
+            # pos_str = move[0].upper()
+            # final_pos_str = move[1].upper()
+            # col_dict = {'A': 0, 'B': 1, 'C': 2,
+            #             'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
+            # pos = (int(pos_str[1])-1, col_dict[pos_str[0]])
+            # final_pos = (int(final_pos_str[1])-1, col_dict[final_pos_str[0]])
+            # if isinstance(self.Board.board[pos[0], pos[1]], Piece):
+            #     print("piece chosen: "+self.Board.board[pos[0], pos[1]].symbol)
+            #     if self.Board.board[pos[0], pos[1]].team == team:
+            #         self.prev_Board = self.Board
+            #         self.Board.update_board([pos,final_pos,move[2].lower()], team)
+            #         self.move_counter += 1
+            #     else:
+            #         print("wrong team tried to play. choose again")
+            #         self.choose_move(move)
+            # else:
+            #     print("chose a tile with no piece. choose again")
+            #     self.choose_move(move)
+            # pass
+            self.prev_Board = self.Board
+            self.Board.update_board(move, team)
+            self.move_counter += 1
         else:
             raise ValueError("this player:" +
                              player +
@@ -80,3 +105,12 @@ class GameEngine():
             new_end = revcol_dict[end[1]] + str(end[0]+1)
             new_dict[key] = [new_start, new_end]
         return new_dict
+
+    def all_moves(self):
+        team, _ = self.get_turn()
+        all_moves_team = []
+        for i in range(8):
+            for j in range(8):
+                if self.Board.board[i,j].team == team:
+                    all_moves_team+=self.get_moves((i,j))
+        return all_moves_team
