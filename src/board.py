@@ -11,6 +11,7 @@ import warnings
 import numpy as np
 from darkchess.src.utils import clean_board
 
+
 class Board(object):
 
     def __init__(self, starting_board=None):

@@ -16,10 +16,8 @@ class GameEngine():
 
     def get_turn(self):
         if self.move_counter % 2 == 0:
-            print("white's turn")
             return "white", self.player1
         else:
-            print("black's turn")
             return "black", self.player2
 
     def get_moves(self, pos):
@@ -92,6 +90,6 @@ class GameEngine():
         all_moves_team = []
         for i in range(8):
             for j in range(8):
-                if self.Board.board[i,j].team == team:
-                    all_moves_team+=self.get_moves((i,j))
+                if self.Board.board[i, j].team == team:
+                    all_moves_team += self.get_moves((i, j))
         return all_moves_team
