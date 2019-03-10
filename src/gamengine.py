@@ -90,6 +90,6 @@ class GameEngine():
         all_moves_team = []
         for i in range(8):
             for j in range(8):
-                if self.Board.board[i,j].team == team:
-                    all_moves_team+=self.get_moves((i,j))
+                if self.Board.board[i, j].team == team:
+                    all_moves_team += self.get_moves((i, j))
         return all_moves_team
