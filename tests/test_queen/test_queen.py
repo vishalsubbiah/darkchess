@@ -24,7 +24,7 @@ def test_queen_moves():
                 (poss[j, 0], poss[j, 1]), "black")
         queen_board = Board(board)
         game = GameEngine(queen_board, player1="computer", player2="computer")
-        for m in range(num_moves):
+        for _ in range(num_moves):
             moves = game.all_moves()
             if len(moves) == 0:
                 break

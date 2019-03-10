@@ -28,7 +28,7 @@ def test_pawn_moves():
             board[6, j] = Pawn((6, j), "black")
         pawn_board = Board(board)
         game = GameEngine(pawn_board, player1="computer", player2="computer")
-        for m in range(num_moves):
+        for _ in range(num_moves):
             moves = game.all_moves()
             if len(moves) == 0 or no_pawns(game.Board.board):
                 break
