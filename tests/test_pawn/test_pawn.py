@@ -7,18 +7,20 @@ from darkchess.src.gamengine import GameEngine
 from darkchess.src.utils import clean_board
 import os
 
+
 def no_pawns(board):
     for i in range(8):
         for j in range(8):
-            if board[i,j].symbol[1]=='p':
+            if board[i, j].symbol[1] == 'p':
                 return False
     return True
+
 
 def test_pawn_moves():
     num_games = 100
     num_moves = 100
     for i in range(num_games):
-        print("game",i+1)
+        print("game", i+1)
         board = clean_board()
         for j in range(8):
             board[1, j] = Pawn((1, j), "white")
