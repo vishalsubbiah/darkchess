@@ -16,10 +16,8 @@ class GameEngine():
 
     def get_turn(self):
         if self.move_counter % 2 == 0:
-            print("white's turn")
             return "white", self.player1
         else:
-            print("black's turn")
             return "black", self.player2
 
     def get_moves(self, pos):
