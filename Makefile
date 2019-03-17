@@ -1,7 +1,7 @@
 test:
-
+	pytest tests/
 clean:
-	rm -rf __pycache__
-	rm -rf .pytest_cache__
+	find . | grep -E "(__pycache__|\.pyc|\.pytest_cache)" | xargs rm -rf
 
 run:
+	python run.py
