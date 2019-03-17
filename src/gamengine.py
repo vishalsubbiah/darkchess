@@ -21,7 +21,7 @@ class GameEngine():
             return "black", self.player2
 
     def get_moves(self, pos):
-        piece = self.Board.board[pos[0], pos[1]]
+        piece = self.Board.board[pos]
         return piece.get_moves(self.Board.board)
 
     def choose_move(self, move=None):
@@ -36,9 +36,9 @@ class GameEngine():
             col_dict = {'A': 0, 'B': 1, 'C': 2,
                         'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
             pos = (int(pos_str[1])-1, col_dict[pos_str[0]])
-            if isinstance(self.Board.board[pos[0], pos[1]], Piece):
-                print("piece chosen: "+self.Board.board[pos[0], pos[1]].symbol)
-                if self.Board.board[pos[0], pos[1]].team == team:
+            if isinstance(self.Board.board[pos], Piece):
+                print("piece chosen: "+self.Board.board[pos].symbol)
+                if self.Board.board[pos].team == team:
                     moves = self.get_moves(pos)
                     if moves == []:
                         print("no moves available for that piece")
@@ -46,7 +46,7 @@ class GameEngine():
                     move_dict = dict()
                     for i, move in enumerate(moves):
                         move_dict[i+1] = move
-                    print(self.translate(move_dict))
+                    print(self.num_alph(move_dict))
                     option = input("move:")
                     self.prev_Board = self.Board
                     self.Board.update_board(move_dict[int(option)], team)
@@ -73,7 +73,7 @@ class GameEngine():
         self.move_counter -= 1
 
     @staticmethod
-    def translate(move_dict):
+    def num_alph(move_dict):
         new_dict = {}
         revcol_dict = {0: 'A', 1: 'B', 2: 'C',
                        3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H'}
