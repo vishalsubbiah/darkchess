@@ -105,9 +105,9 @@ class Board(object):
             key_word = 'base'
 
         if key_word == 'base':
-            self.board[end[0], end[1]] = self.board[start[0], start[1]]
-            self.board[start[0], start[1]] = Dummy([start[0], start[1]])
-            self.board[end[0], end[1]].set_position(end)
+            self.board[end] = self.board[start]
+            self.board[start] = Dummy(start)
+            self.board[end].set_position(end)
             self.move_counter += 1
 
         elif key_word == "enpasse":
@@ -117,8 +117,8 @@ class Board(object):
             warnings.warn("castling not implemented yet")
 
         elif key_word == "evolve":
-            self.board[end[0], end[1]] = Queen(end, team)
-            self.board[start[0], start[1]] = Dummy([start[0], start[1]])
+            self.board[end] = Queen(end, team)
+            self.board[start] = Dummy(start)
             self.move_counter += 1
 
         else:

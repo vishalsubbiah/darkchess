@@ -26,9 +26,9 @@ class Bishop(Piece):
             for i in range(min(x, y)):
                 new_pos = (x-i-1, y-i-1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "black":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -36,9 +36,9 @@ class Bishop(Piece):
             for i in range(min(7-x, 7-y)):
                 new_pos = (x+i+1, y+i+1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "black":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -46,9 +46,9 @@ class Bishop(Piece):
             for i in range(min(x, 7-y)):
                 new_pos = (x-i-1, y+i+1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "black":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -56,9 +56,9 @@ class Bishop(Piece):
             for i in range(min(7-x, y)):
                 new_pos = (x+i+1, y-i-1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "black":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -68,9 +68,9 @@ class Bishop(Piece):
             for i in range(min(x, y)):
                 new_pos = (x-i-1, y-i-1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "white":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -78,9 +78,9 @@ class Bishop(Piece):
             for i in range(min(7-x, 7-y)):
                 new_pos = (x+i+1, y+i+1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "white":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -88,9 +88,9 @@ class Bishop(Piece):
             for i in range(min(x, 7-y)):
                 new_pos = (x-i-1, y+i+1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "white":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
@@ -98,9 +98,9 @@ class Bishop(Piece):
             for i in range(min(7-x, y)):
                 new_pos = (x+i+1, y-i-1)
                 if board[new_pos].team is None:
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                 elif board[new_pos].team == "white":
-                    moves.append([pos, new_pos, 'base'])
+                    moves.append((pos, new_pos, 'base'))
                     break
                 else:
                     break
