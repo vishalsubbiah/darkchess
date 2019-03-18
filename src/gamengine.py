@@ -1,5 +1,5 @@
 from darkchess.src.piece import Piece
-
+from copy import deepcopy
 
 class GameEngine():
 
