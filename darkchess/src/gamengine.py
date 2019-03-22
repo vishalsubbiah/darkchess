@@ -61,7 +61,6 @@ class GameEngine():
                         if self.black_check:
                             print("black king in check, play again")
                             self.undo_move()
-                            input(move)
                             self.choose_move(move)
                     self.move_counter += 1
                 else:
@@ -143,7 +142,8 @@ class GameEngine():
                     all_moves_team += self.get_moves((i, j))
         return all_moves_team
 
-
+    def is_checkmate(self):
+        pass
 
 
 
