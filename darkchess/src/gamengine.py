@@ -1,19 +1,20 @@
 from darkchess.src.piece import Piece
-from copy import deepcopy
+import numpy as np
 
 class GameEngine():
 
     def __init__(self, Board, player1=None, player2=None):
         self.move_counter = 0
         self.Board = Board
-        self.prev_Board = Board
+        self.prev_Board = np.copy(Board)
         if player1 is None:
             player1 = "human"
         if player2 is None:
             player2 = "human"
         self.player1 = player1  # plays as white
         self.player2 = player2  # plays as black
-
+        self.black_check = False
+        self.white_check = False
     def get_turn(self):
         if self.move_counter % 2 == 0:
             return "white", self.player1
@@ -48,8 +49,19 @@ class GameEngine():
                         move_dict[i+1] = move
                     print(self.num_alph(move_dict))
                     option = input("move:")
-                    self.prev_Board = self.Board
+                    self.prev_Board = np.copy(self.Board)
                     self.Board.update_board(move_dict[int(option)], team)
+                    self.is_check()
+                    if team=="white":
+                        if self.white_check:
+                            print("white king in check, play again")
+                            self.undo_move()
+                            self.choose_move(move)
+                    if team=="black":
+                        if self.black_check:
+                            print("black king in check, play again")
+                            self.undo_move()
+                            self.choose_move(move)
                     self.move_counter += 1
                 else:
                     print("wrong team tried to play. choose again")
@@ -60,8 +72,19 @@ class GameEngine():
         elif player == "computer":
             if move is None:
                 raise ValueError("Move is None, cant be in computer mode")
-            self.prev_Board = self.Board
+            self.prev_Board = np.copy(self.Board)
             self.Board.update_board(move, team)
+            self.is_check()
+            if team=="white":
+                if self.white_check:
+                    print("white king in check, play again")
+                    self.undo_move()
+                    self.choose_move(move)
+                if team=="black":
+                    if self.black_check:
+                        print("black king in check, play again")
+                        self.undo_move()
+                        self.choose_move(move)
             self.move_counter += 1
         else:
             raise ValueError("this player:" +
@@ -69,7 +92,7 @@ class GameEngine():
                              " doesn't exist in the realm of this game")
 
     def undo_move(self):
-        self.Board = self.prev_Board
+        self.Board = np.copy(self.prev_Board)
         self.move_counter -= 1
 
     @staticmethod
@@ -85,6 +108,32 @@ class GameEngine():
             new_dict[key] = [new_start, new_end]
         return new_dict
 
+    def _all_moves_minus_king(self, board, team):
+        all_moves_team = []
+        king_pos = None
+        for i in range(8):
+            for j in range(8):
+                if board[i, j].team == team and board[i, j].get_symbol() is not team[0]+"K":
+                    all_moves_team += board[i, j].get_moves(board)
+                if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K":
+                    king_pos = (i,j)
+        all_pos_team = []
+        for move in all_moves_team:
+            all_pos_team.append(move[2])
+        return list(set(all_moves_team)), king_pos
+
+    def is_check(self):
+        white_moves, wK_pos = self._all_moves_minus_king(self.Board.board, "white")
+        black_moves, bK_pos = self._all_moves_minus_king(self.Board.board, "black")
+        if bK_pos in white_moves:
+            self.black_check=True
+        else:
+            self.black_check=False
+        if wK_pos in black_moves:
+            self.white_check=True
+        else:
+            self.white_check=False
+
     def all_moves(self):
         team, _ = self.get_turn()
         all_moves_team = []
@@ -93,3 +142,8 @@ class GameEngine():
                 if self.Board.board[i, j].team == team:
                     all_moves_team += self.get_moves((i, j))
         return all_moves_team
+
+
+
+
+
