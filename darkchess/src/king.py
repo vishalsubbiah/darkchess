@@ -96,14 +96,14 @@ class King(Piece):
         all_moves_team = []
         for i in range(8):
             for j in range(8):
-                if board[i, j].team == team and board[i, j].get_symbol() is not team[0]+"K":
+                if board[i, j].team == team and board[i, j].get_symbol() != team[0]+"K ":
                     all_moves_team += board[i, j].get_moves(board)
-                if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K":
+                if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K ":
                     opp_king_pos = (i,j)
         all_pos_team = []
         for move in all_moves_team:
-            all_pos_team.append(move[2])
-        return list(set(all_moves_team)), opp_king_pos
+            all_pos_team.append(move[1])
+        return list(set(all_pos_team)), opp_king_pos
 
     def too_close(self,pos1,pos2):
         if pos1 is None or pos2 is None:

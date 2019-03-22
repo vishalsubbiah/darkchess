@@ -45,8 +45,8 @@ class GameEngine():
                         print("no moves available for that piece")
                         self.choose_move(move)
                     move_dict = dict()
-                    for i, move in enumerate(moves):
-                        move_dict[i+1] = move
+                    for i, pos_move in enumerate(moves):
+                        move_dict[i+1] = pos_move
                     print(self.num_alph(move_dict))
                     option = input("move:")
                     self.prev_Board = np.copy(self.Board)
@@ -61,6 +61,7 @@ class GameEngine():
                         if self.black_check:
                             print("black king in check, play again")
                             self.undo_move()
+                            input(move)
                             self.choose_move(move)
                     self.move_counter += 1
                 else:
@@ -80,11 +81,11 @@ class GameEngine():
                     print("white king in check, play again")
                     self.undo_move()
                     self.choose_move(move)
-                if team=="black":
-                    if self.black_check:
-                        print("black king in check, play again")
-                        self.undo_move()
-                        self.choose_move(move)
+            if team=="black":
+                if self.black_check:
+                    print("black king in check, play again")
+                    self.undo_move()
+                    self.choose_move(move)
             self.move_counter += 1
         else:
             raise ValueError("this player:" +
@@ -93,7 +94,6 @@ class GameEngine():
 
     def undo_move(self):
         self.Board = np.copy(self.prev_Board)
-        self.move_counter -= 1
 
     @staticmethod
     def num_alph(move_dict):
@@ -113,14 +113,14 @@ class GameEngine():
         king_pos = None
         for i in range(8):
             for j in range(8):
-                if board[i, j].team == team and board[i, j].get_symbol() is not team[0]+"K":
+                if board[i, j].team == team and board[i, j].get_symbol() != team[0]+"K ":
                     all_moves_team += board[i, j].get_moves(board)
-                if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K":
+                if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K ":
                     king_pos = (i,j)
         all_pos_team = []
         for move in all_moves_team:
-            all_pos_team.append(move[2])
-        return list(set(all_moves_team)), king_pos
+            all_pos_team.append(move[1])
+        return list(set(all_pos_team)), king_pos
 
     def is_check(self):
         white_moves, wK_pos = self._all_moves_minus_king(self.Board.board, "white")
