@@ -2,6 +2,9 @@ from darkchess.src.piece import Piece
 
 
 class Queen(Piece):
+    """
+    """
+
     def get_name(self):
         """
         """

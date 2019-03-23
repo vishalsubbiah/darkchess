@@ -8,4 +8,3 @@ while True:
     game.Board.view_board_debug()
     game.Board.view_board()
     game.choose_move()
-

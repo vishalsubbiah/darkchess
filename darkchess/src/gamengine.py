@@ -5,6 +5,8 @@ import sys
 
 
 class GameEngine():
+    """
+    """
 
     def __init__(self, Board, player1=None, player2=None):
         """

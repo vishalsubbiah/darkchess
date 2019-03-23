@@ -2,6 +2,9 @@ from darkchess.src.piece import Piece
 
 
 class Bishop(Piece):
+    """
+    """
+
     def get_name(self):
         """
         """

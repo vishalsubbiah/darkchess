@@ -3,6 +3,9 @@ import numpy as np
 
 
 class King(Piece):
+    """
+    """
+
     def get_name(self):
         """
         """

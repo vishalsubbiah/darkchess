@@ -2,6 +2,9 @@ from darkchess.src.piece import Piece
 
 
 class Pawn(Piece):
+    """
+    """
+
     def get_name(self):
         """
         """

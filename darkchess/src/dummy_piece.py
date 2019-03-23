@@ -3,6 +3,9 @@ import numpy as np
 
 
 class Dummy(Piece):
+    """
+    """
+
     def get_name(self):
         """
         """
