@@ -9,6 +9,8 @@ import os
 
 
 def test_bishop_moves():
+    """
+    """
     num_games = 100
     num_moves = 300
     for i in range(num_games):

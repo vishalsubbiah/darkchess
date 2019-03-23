@@ -7,6 +7,14 @@ import sys
 class GameEngine():
 
     def __init__(self, Board, player1=None, player2=None):
+        """
+        Sets up game rules, and keeps track of check, checkmate etc.
+        Args:
+            Board: Pieces positioning and the game state
+            player1: computer or human
+            player2: computer or human
+            Note: computer player is buggy, mainly for running tests
+        """
         self.move_counter = 0
         self.Board = Board
         self.prev_Board = base_Board()
@@ -21,16 +29,23 @@ class GameEngine():
         self.white_check = False
 
     def get_turn(self):
+        """
+        returns team and player mode
+        """
         if self.move_counter % 2 == 0:
             return "white", self.player1
         else:
             return "black", self.player2
 
     def get_moves(self, pos):
+        """
+        """
         piece = self.Board.board[pos]
         return piece.get_moves(self.Board.board)
 
     def choose_move(self, move=None):
+        """
+        """
         team, player = self.get_turn()
         print(team + " to play")
         if player == "human":
@@ -105,10 +120,14 @@ class GameEngine():
                              " doesn't exist in the realm of this game")
 
     def undo_move(self):
+        """
+        """
         self.Board.board = np.copy(self.prev_Board.board)
 
     @staticmethod
     def num_alph(move_dict):
+        """
+        """
         new_dict = {}
         revcol_dict = {0: 'A', 1: 'B', 2: 'C',
                        3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H'}
@@ -121,6 +140,8 @@ class GameEngine():
         return new_dict
 
     def _all_moves_minus_king(self, board, team):
+        """
+        """
         all_moves_team = []
         king_pos = None
         for i in range(8):
@@ -135,6 +156,8 @@ class GameEngine():
         return list(set(all_pos_team)), king_pos
 
     def is_check(self):
+        """
+        """
         white_moves, wK_pos = self._all_moves_minus_king(
             self.Board.board, "white")
         black_moves, bK_pos = self._all_moves_minus_king(
@@ -149,6 +172,8 @@ class GameEngine():
             self.white_check = False
 
     def all_moves(self):
+        """
+        """
         team, _ = self.get_turn()
         all_moves_team = []
         for i in range(8):
@@ -158,6 +183,8 @@ class GameEngine():
         return all_moves_team
 
     def is_checkmate(self, team):
+        """
+        """
         self.undo_move()
         moves = self.all_moves()
         game_over = True

@@ -6,6 +6,8 @@ import os
 from mock import patch
 
 def test_normal_game():
+    """
+    """
     num_games = 100
     num_moves = 300
     for i in range(num_games):

@@ -3,12 +3,18 @@ from darkchess.src.piece import Piece
 
 class Bishop(Piece):
     def get_name(self):
+        """
+        """
         return "bishop"
 
     def get_value(self):
+        """
+        """
         return 3
 
     def get_symbol(self):
+        """
+        """
         if self.team == "white":
             return 'wb '
         elif self.team == "black":
@@ -19,6 +25,8 @@ class Bishop(Piece):
                              " doesn't exist in the realm of this game")
 
     def get_moves(self, board):
+        """
+        """
         moves = []
         pos = self.get_position()
         x, y = pos

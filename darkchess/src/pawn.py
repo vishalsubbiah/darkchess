@@ -3,12 +3,18 @@ from darkchess.src.piece import Piece
 
 class Pawn(Piece):
     def get_name(self):
+        """
+        """
         return "pawn"
 
     def get_value(self):
+        """
+        """
         return 1
 
     def get_symbol(self):
+        """
+        """
         if self.team == "white":
             return 'wp '
         elif self.team == "black":
@@ -19,6 +25,8 @@ class Pawn(Piece):
                              " doesn't exist in the realm of this game")
 
     def get_moves(self, board):
+        """
+        """
         moves = []
         pos = self.get_position()
         x, y = pos

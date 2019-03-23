@@ -4,12 +4,18 @@ import numpy as np
 
 class King(Piece):
     def get_name(self):
+        """
+        """
         return "king"
 
     def get_value(self):
+        """
+        """
         return np.inf
 
     def get_symbol(self):
+        """
+        """
         if self.team == "white":
             return 'wK '
         elif self.team == "black":
@@ -20,6 +26,8 @@ class King(Piece):
                              " doesn't exist in the realm of this game")
 
     def get_moves(self, board):
+        """
+        """
         moves = []
         x, y = self.get_position()
         # 8 positions
@@ -77,6 +85,8 @@ class King(Piece):
         return moves
 
     def is_next_move_check(self, new_pos):
+        """
+        """
         if self.team == "white":
             # find black moves
             pass
@@ -88,6 +98,8 @@ class King(Piece):
                              " doesn't exist in the realm of this game")
 
     def _all_opp_moves_minus_king(self, board):
+        """
+        """
         opp_king_pos = None
         if self.team == "white":
             team = "black"
@@ -106,6 +118,8 @@ class King(Piece):
         return list(set(all_pos_team)), opp_king_pos
 
     def too_close(self, pos1, pos2):
+        """
+        """
         if pos1 is None or pos2 is None:
             return False
         x1, y1 = pos1

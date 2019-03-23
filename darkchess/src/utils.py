@@ -4,6 +4,8 @@ import numpy as np
 
 
 def clean_board():
+    """
+    """
     init_board = np.zeros((8, 8), dtype=Piece)
     for i in range(8):
         for j in range(8):

@@ -9,6 +9,8 @@ import os
 
 
 def no_pawns(board):
+    """
+    """
     for i in range(8):
         for j in range(8):
             if board[i, j].symbol[1] == 'p':
@@ -17,6 +19,8 @@ def no_pawns(board):
 
 
 def test_pawn_moves():
+    """
+    """
     num_games = 100
     num_moves = 100
     for i in range(num_games):

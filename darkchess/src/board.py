@@ -15,6 +15,8 @@ from darkchess.src.utils import clean_board
 class Board(object):
 
     def __init__(self, starting_board=None):
+        """
+        """
         self.board = np.empty((8, 8), dtype=Piece)
         if starting_board is None:
             self._start_pos()
@@ -22,6 +24,8 @@ class Board(object):
             self.board = starting_board
 
     def _start_pos(self):
+        """
+        """
         # white pieces
         self.board = clean_board()
         for j in range(8):
@@ -48,6 +52,8 @@ class Board(object):
         self.board[7, 3] = Queen((7, 3), "black")
 
     def __str__(self):
+        """
+        """
         board_rep = "  A  B  C  D  E  F  G  H \n"
         for i in range(7, -1, -1):
             board_rep += str(i+1)+" "
@@ -71,9 +77,13 @@ class Board(object):
         return board_rep
 
     def view_board(self):
+        """
+        """
         print(self.__str__())
 
     def view_board_debug(self):
+        """
+        """
         board_rep = ""
         for i in range(0, 8, 1):
             for j in range(0, 8, 1):
@@ -94,9 +104,13 @@ class Board(object):
         print(board_rep)
 
     def __repr_(self):
+        """
+        """
         return self.__str__()
 
     def update_board(self, move, team):
+        """
+        """
         start = move[0]
         end = move[1]
         key_word = move[2]  # 'enpasse' or 'castling' or 'evolve' or 'base'
