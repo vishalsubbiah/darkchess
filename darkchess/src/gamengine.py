@@ -1,12 +1,16 @@
 from darkchess.src.piece import Piece
+from darkchess.src.board import Board as base_Board
 import numpy as np
+import sys
+
 
 class GameEngine():
 
     def __init__(self, Board, player1=None, player2=None):
         self.move_counter = 0
         self.Board = Board
-        self.prev_Board = np.copy(Board)
+        self.prev_Board = base_Board()
+        self.prev_Board.board = np.copy(Board.board)
         if player1 is None:
             player1 = "human"
         if player2 is None:
@@ -15,6 +19,7 @@ class GameEngine():
         self.player2 = player2  # plays as black
         self.black_check = False
         self.white_check = False
+
     def get_turn(self):
         if self.move_counter % 2 == 0:
             return "white", self.player1
@@ -49,18 +54,22 @@ class GameEngine():
                         move_dict[i+1] = pos_move
                     print(self.num_alph(move_dict))
                     option = input("move:")
-                    self.prev_Board = np.copy(self.Board)
+                    self.prev_Board.board = np.copy(self.Board.board)
                     self.Board.update_board(move_dict[int(option)], team)
                     self.is_check()
-                    if team=="white":
+                    if team == "white":
                         if self.white_check:
-                            print("white king in check, play again")
+                            print("white king in check")
                             self.undo_move()
+                            self.is_checkmate(team)
+                            print("play again")
                             self.choose_move(move)
-                    if team=="black":
+                    if team == "black":
                         if self.black_check:
-                            print("black king in check, play again")
+                            print("black king in check")
                             self.undo_move()
+                            self.is_checkmate(team)
+                            print("play again")
                             self.choose_move(move)
                     self.move_counter += 1
                 else:
@@ -72,18 +81,22 @@ class GameEngine():
         elif player == "computer":
             if move is None:
                 raise ValueError("Move is None, cant be in computer mode")
-            self.prev_Board = np.copy(self.Board)
+            self.prev_Board.board = np.copy(self.Board.board)
             self.Board.update_board(move, team)
             self.is_check()
-            if team=="white":
+            if team == "white":
                 if self.white_check:
-                    print("white king in check, play again")
+                    print("white king in check")
                     self.undo_move()
+                    self.is_checkmate(team)
+                    print("play again")
                     self.choose_move(move)
-            if team=="black":
+            if team == "black":
                 if self.black_check:
-                    print("black king in check, play again")
+                    print("black king in check")
                     self.undo_move()
+                    self.is_checkmate(team)
+                    print("play again")
                     self.choose_move(move)
             self.move_counter += 1
         else:
@@ -92,7 +105,7 @@ class GameEngine():
                              " doesn't exist in the realm of this game")
 
     def undo_move(self):
-        self.Board = np.copy(self.prev_Board)
+        self.Board.board = np.copy(self.prev_Board.board)
 
     @staticmethod
     def num_alph(move_dict):
@@ -115,23 +128,25 @@ class GameEngine():
                 if board[i, j].team == team and board[i, j].get_symbol() != team[0]+"K ":
                     all_moves_team += board[i, j].get_moves(board)
                 if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K ":
-                    king_pos = (i,j)
+                    king_pos = (i, j)
         all_pos_team = []
         for move in all_moves_team:
             all_pos_team.append(move[1])
         return list(set(all_pos_team)), king_pos
 
     def is_check(self):
-        white_moves, wK_pos = self._all_moves_minus_king(self.Board.board, "white")
-        black_moves, bK_pos = self._all_moves_minus_king(self.Board.board, "black")
+        white_moves, wK_pos = self._all_moves_minus_king(
+            self.Board.board, "white")
+        black_moves, bK_pos = self._all_moves_minus_king(
+            self.Board.board, "black")
         if bK_pos in white_moves:
-            self.black_check=True
+            self.black_check = True
         else:
-            self.black_check=False
+            self.black_check = False
         if wK_pos in black_moves:
-            self.white_check=True
+            self.white_check = True
         else:
-            self.white_check=False
+            self.white_check = False
 
     def all_moves(self):
         team, _ = self.get_turn()
@@ -142,8 +157,32 @@ class GameEngine():
                     all_moves_team += self.get_moves((i, j))
         return all_moves_team
 
-    def is_checkmate(self):
-        pass
-
-
-
+    def is_checkmate(self, team):
+        self.undo_move()
+        moves = self.all_moves()
+        game_over = True
+        for move in moves:
+            self.Board.update_board(move, team)
+            self.is_check()
+            if team == "white":
+                if self.white_check:
+                    self.undo_move()
+                else:
+                    self.undo_move()
+                    game_over = False
+                    break
+            elif team == "black":
+                if self.black_check:
+                    self.undo_move()
+                else:
+                    self.undo_move()
+                    game_over = False
+                    break
+        if game_over:
+            print(team + " lost")
+            if team == "white":
+                print("black wins")
+                sys.exit(0)
+            if team == "black":
+                print("white wins")
+                sys.exit(0)

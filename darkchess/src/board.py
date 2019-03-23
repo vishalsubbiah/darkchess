@@ -20,7 +20,6 @@ class Board(object):
             self._start_pos()
         else:
             self.board = starting_board
-        self.move_counter = 0
 
     def _start_pos(self):
         # white pieces
@@ -108,7 +107,6 @@ class Board(object):
             self.board[end] = self.board[start]
             self.board[start] = Dummy(start)
             self.board[end].set_position(end)
-            self.move_counter += 1
 
         elif key_word == "enpasse":
             warnings.warn("enpasse not implemented yet")
@@ -119,7 +117,6 @@ class Board(object):
         elif key_word == "evolve":
             self.board[end] = Queen(end, team)
             self.board[start] = Dummy(start)
-            self.move_counter += 1
 
         else:
             raise ValueError("this action:"+key_word +
