@@ -90,14 +90,14 @@ class GameEngine():
                     self.undo_move()
                     self.is_checkmate(team)
                     print("play again")
-                    self.choose_move(move)
+                    return None
             if team == "black":
                 if self.black_check:
                     print("black king in check")
                     self.undo_move()
                     self.is_checkmate(team)
                     print("play again")
-                    self.choose_move(move)
+                    return None
             self.move_counter += 1
         else:
             raise ValueError("this player:" +
