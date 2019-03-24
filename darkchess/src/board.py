@@ -24,6 +24,7 @@ class Board(object):
             self._start_pos()
         else:
             self.board = starting_board
+        self.turn = "white"
 
     def _start_pos(self):
         """
@@ -75,7 +76,7 @@ class Board(object):
 
             board_rep += " "+str(i+1)
             board_rep += "\n"
-        board_rep += "  A  B  C  D  E  F  G  H "
+        board_rep += "  A  B  C  D  E  F  G  H \n"
         return board_rep
 
     def view_board(self):
@@ -134,6 +135,10 @@ class Board(object):
             self.board[end] = Queen(end, team)
             self.board[start] = Dummy(start)
 
+        if self.turn == "white":
+            self.turn = "black"
+        elif self.turn == "black":
+            self.turn = "white"
         else:
             raise ValueError("this action:"+key_word +
                              " doesn't exist in the realm of this game")
