@@ -95,19 +95,6 @@ class King(Piece):
                              " doesn't exist in the realm of this game")
         return moves
 
-    def is_next_move_check(self, new_pos):
-        """
-        """
-        if self.team == "white":
-            # find black moves
-            pass
-        elif self.team == "black":
-            # find white moves
-            pass
-        else:
-            raise ValueError("this team:"+self.team +
-                             " doesn't exist in the realm of this game")
-
     def _all_opp_moves_minus_king(self, board):
         """
         Returns all opponent moves except their king's moves

@@ -6,6 +6,7 @@ import sys
 
 class GameEngine():
     """
+    Engine which controls game dynamics
     """
 
     def __init__(self, Board, player1=None, player2=None):
@@ -41,12 +42,18 @@ class GameEngine():
 
     def get_moves(self, pos):
         """
+        Returns moves for the piece from that position
+        Args:
+            pos: (i,j) on the board
         """
         piece = self.Board.board[pos]
         return piece.get_moves(self.Board.board)
 
     def choose_move(self, move=None):
         """
+        how the user/computer plays the game
+        Args:
+            move: move (start_pos,end_pos,type_move) to execute if valid
         """
         team, player = self.get_turn()
         print(team + " to play")
@@ -123,12 +130,16 @@ class GameEngine():
 
     def undo_move(self):
         """
+        Undos move (used if user chooses a move which maintains check on their king)
         """
         self.Board.board = np.copy(self.prev_Board.board)
 
     @staticmethod
     def num_alph(move_dict):
         """
+        converts moves in tuple format to human readable chess board format
+        Args:
+            move_dict: dictionary of all possible moves for user to choose from.
         """
         new_dict = {}
         revcol_dict = {0: 'A', 1: 'B', 2: 'C',
@@ -143,6 +154,10 @@ class GameEngine():
 
     def _all_moves_minus_king(self, board, team):
         """
+        returns all moves except the team's king
+        Args:
+            board: numpy array of dtype Piece
+            team: "white" or "black"
         """
         all_moves_team = []
         king_pos = None
@@ -159,6 +174,7 @@ class GameEngine():
 
     def is_check(self):
         """
+        Checks if either team is in check
         """
         white_moves, wK_pos = self._all_moves_minus_king(
             self.Board.board, "white")
@@ -175,6 +191,7 @@ class GameEngine():
 
     def all_moves(self):
         """
+        Returns all moves for team to play
         """
         team, _ = self.get_turn()
         all_moves_team = []
@@ -186,6 +203,9 @@ class GameEngine():
 
     def is_checkmate(self, team):
         """
+        Checks if checkmate for given team
+        Args:
+            team: "white" or "black"
         """
         self.undo_move()
         moves = self.all_moves()

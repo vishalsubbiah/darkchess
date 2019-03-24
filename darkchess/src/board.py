@@ -14,10 +14,15 @@ from darkchess.src.utils import clean_board
 
 class Board(object):
     """
+    Layout of the game and pieces
     """
 
     def __init__(self, starting_board=None):
         """
+        Initial Piece positioning
+        Args:
+        starting_board: unique Piece positioning, if None does the default placement.
+                        Is numpy array (8,8) of dtype Piece
         """
         self.board = np.empty((8, 8), dtype=Piece)
         if starting_board is None:
@@ -28,6 +33,7 @@ class Board(object):
 
     def _start_pos(self):
         """
+        Default Chess Board positioning
         """
         # white pieces
         self.board = clean_board()
@@ -56,6 +62,7 @@ class Board(object):
 
     def __str__(self):
         """
+        Represent the Chess Board the way the User is used to playing them
         """
         board_rep = "  A  B  C  D  E  F  G  H \n"
         for i in range(7, -1, -1):
@@ -81,11 +88,13 @@ class Board(object):
 
     def view_board(self):
         """
+        Represent the Chess Board the way the User is used to playing them
         """
         print(self.__str__())
 
     def view_board_debug(self):
         """
+        Represent the Chess Board in the numpy array format for easy debugging
         """
         board_rep = ""
         for i in range(0, 8, 1):
@@ -108,11 +117,16 @@ class Board(object):
 
     def __repr_(self):
         """
+        Represent the Chess Board the way the User is used to playing them
         """
         return self.__str__()
 
     def update_board(self, move, team):
         """
+        Update the board when move is made, to new state
+        Args:
+            move: (curr_pos, new_pos, key_word)
+            team: which team's piece is being updated
         """
         start = move[0]
         end = move[1]

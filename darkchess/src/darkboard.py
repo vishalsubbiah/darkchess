@@ -4,12 +4,13 @@ from sty import fg, bg, rs
 
 class DarkBoard(Board):
     """
+    Layout of the game and pieces for dark mode
     """
 
     def __str__(self):
         """
+        Represent the Chess Board the way dark mode shows them
         """
-        print(self.turn)
         visible_pos = self.all_pos()
         board_rep = "  A  B  C  D  E  F  G  H \n"
         for i in range(7, -1, -1):
@@ -51,6 +52,7 @@ class DarkBoard(Board):
 
     def all_pos(self):
         """
+        all positions the team can see on the board
         """
         team = self.turn
         all_moves_team = []
@@ -66,6 +68,7 @@ class DarkBoard(Board):
 
     def view_board_true_sight(self):
         """
+        Represent the Chess Board the way the User is used to playing them in normal mode
         """
         board_rep = "  A  B  C  D  E  F  G  H \n"
         for i in range(7, -1, -1):
