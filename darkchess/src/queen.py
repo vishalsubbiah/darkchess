@@ -3,20 +3,24 @@ from darkchess.src.piece import Piece
 
 class Queen(Piece):
     """
+    Queen Piece (identical for both black and white in a normal game)
     """
 
     def get_name(self):
         """
+        Returns name of the Piece
         """
         return "queen"
 
     def get_value(self):
         """
+        Returns value of the Piece
         """
         return 9
 
     def get_symbol(self):
         """
+        Returns symbol used to represent the Piece on the board
         """
         if self.team == "white":
             return 'wq '
@@ -28,6 +32,10 @@ class Queen(Piece):
 
     def get_moves(self, board):
         """
+        All possible moves for this Piece
+        Args:
+            board: numpy array of dtype Piece
+        Returns list of moves (start_pos,end_pos,type_move)
         """
         moves = []
         pos = self.get_position()

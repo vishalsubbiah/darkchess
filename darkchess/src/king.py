@@ -4,20 +4,24 @@ import numpy as np
 
 class King(Piece):
     """
+    King Piece (identical for all both in a normal game)
     """
 
     def get_name(self):
         """
+        Returns name of the Piece
         """
         return "king"
 
     def get_value(self):
         """
+        Returns value of the Piece
         """
         return np.inf
 
     def get_symbol(self):
         """
+        Returns symbol used to represent the Piece on the board
         """
         if self.team == "white":
             return 'wK '
@@ -30,6 +34,10 @@ class King(Piece):
 
     def get_moves(self, board):
         """
+        All possible moves for this Piece
+        Args:
+            board: numpy array of dtype Piece
+        Returns list of moves (start_pos,end_pos,type_move)
         """
         moves = []
         x, y = self.get_position()
@@ -102,6 +110,9 @@ class King(Piece):
 
     def _all_opp_moves_minus_king(self, board):
         """
+        Returns all opponent moves except their king's moves
+        Args:
+            board: numpy array of dtype Piece
         """
         opp_king_pos = None
         if self.team == "white":
@@ -122,6 +133,11 @@ class King(Piece):
 
     def too_close(self, pos1, pos2):
         """
+        Check if two positions are within sqrt(2) distance of each other
+        Used to check if the two kings are adjacent to each other
+        Args:
+            pos1: position on board
+            pos2: position on board
         """
         if pos1 is None or pos2 is None:
             return False

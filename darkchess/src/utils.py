@@ -5,6 +5,7 @@ import numpy as np
 
 def clean_board():
     """
+    Sets up an empty board
     """
     init_board = np.zeros((8, 8), dtype=Piece)
     for i in range(8):
