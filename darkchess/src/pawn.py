@@ -46,7 +46,7 @@ class Pawn(Piece):
             if x == 1:
                 if board[x+1, y].team is None:
                     moves.append((pos, (x+1, y), 'base'))
-                if board[x+2, y].team is None:
+                if board[x+2, y].team is None and board[x+1, y].team is None:
                     moves.append((pos, (x+2, y), 'base'))
                 if y-1 >= 0:
                     if board[x+1, y-1].team is "black":
@@ -66,7 +66,7 @@ class Pawn(Piece):
                     if board[x+1, y+1].team is "black":
                         moves.append((pos, (x+1, y+1), 'base'))
                 return moves
-            elif x == 6:
+            if x == 6:
                 if board[x+1, y].team is None:
                     moves.append((pos, (x+1, y), 'evolve'))
                 if y-1 >= 0:
@@ -76,13 +76,15 @@ class Pawn(Piece):
                     if board[x+1, y+1].team is "black":
                         moves.append((pos, (x+1, y+1), 'evolve'))
                 return moves
+            if x == 7:
+                raise ValueError("something went wrong, why didnt you evolve")
 
         elif self.team == "black":
 
             if x == 6:
                 if board[x-1, y].team is None:
                     moves.append((pos, (x-1, y), 'base'))
-                if board[x-2, y].team is None:
+                if board[x-2, y].team is None and board[x-1, y].team is None:
                     moves.append((pos, (x-2, y), 'base'))
                 if y-1 >= 0:
                     if board[x-1, y-1].team is "white":
@@ -102,7 +104,7 @@ class Pawn(Piece):
                     if board[x-1, y+1].team is "white":
                         moves.append((pos, (x-1, y+1), 'base'))
                 return moves
-            elif x == 1:
+            if x == 1:
                 if board[x-1, y].team is None:
                     moves.append((pos, (x-1, y), 'evolve'))
                 if y-1 >= 0:
@@ -112,7 +114,12 @@ class Pawn(Piece):
                     if board[x-1, y+1].team is "white":
                         moves.append((pos, (x-1, y+1), 'evolve'))
                 return moves
+            if x == 0:
+                raise ValueError("something went wrong, why didnt you evolve")
         else:
             raise ValueError("this team:" +
                              self.team +
                              " doesn't exist in the realm of this game")
+    def copy(self):
+        new_piece = Pawn(self.pos,self.team)
+        return new_piece

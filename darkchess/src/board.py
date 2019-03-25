@@ -10,7 +10,7 @@ from darkchess.src.dummy_piece import Dummy
 import warnings
 import numpy as np
 from darkchess.src.utils import clean_board
-
+from copy import copy
 
 class Board(object):
     """
@@ -156,3 +156,12 @@ class Board(object):
         else:
             raise ValueError("this action:"+key_word +
                              " doesn't exist in the realm of this game")
+
+    def copy(self):
+        new_Board = Board()
+        for i in range(8):
+            for j in range(8):
+                new_Board.board[i,j]=self.board[i,j].copy()
+                new_Board.board[i,j].set_position((i,j))
+        new_Board.turn = copy(self.turn)
+        return new_Board

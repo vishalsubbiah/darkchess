@@ -61,3 +61,7 @@ class Piece(object):
             pos: position on chess board
         """
         self.pos = pos
+
+    def copy(self):
+        new_piece = Piece(self.pos,self.team)
+        return new_piece

@@ -20,8 +20,7 @@ class GameEngine():
         """
         self.move_counter = 0
         self.Board = Board
-        self.prev_Board = base_Board()
-        self.prev_Board.board = np.copy(Board.board)
+        self.prev_Board = Board.copy()
         if player1 is None:
             player1 = "human"
         if player2 is None:
@@ -78,7 +77,7 @@ class GameEngine():
                         move_dict[i+1] = pos_move
                     print(self.num_alph(move_dict))
                     option = input("move:")
-                    self.prev_Board.board = np.copy(self.Board.board)
+                    self.prev_Board = self.Board.copy()
                     self.Board.update_board(move_dict[int(option)], team)
                     self.is_check()
                     if team == "white":
@@ -105,7 +104,7 @@ class GameEngine():
         elif player == "computer":
             if move is None:
                 raise ValueError("Move is None, cant be in computer mode")
-            self.prev_Board.board = np.copy(self.Board.board)
+            self.prev_Board = self.Board.copy()
             self.Board.update_board(move, team)
             self.is_check()
             if team == "white":
@@ -132,7 +131,7 @@ class GameEngine():
         """
         Undos move (used if user chooses a move which maintains check on their king)
         """
-        self.Board.board = np.copy(self.prev_Board.board)
+        self.Board = self.prev_Board.copy()
 
     @staticmethod
     def num_alph(move_dict):

@@ -186,3 +186,6 @@ class Queen(Piece):
         else:
             raise ValueError("this team:"+self.team +
                              " doesn't exist in the realm of this game")
+    def copy(self):
+        new_piece = Queen(self.pos,self.team)
+        return new_piece

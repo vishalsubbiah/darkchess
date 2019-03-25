@@ -33,3 +33,7 @@ class Dummy(Piece):
         Returns list of moves (start_pos,end_pos,type_move)
         """
         return []
+    
+    def copy(self):
+        new_piece = Dummy(self.pos,self.team)
+        return new_piece
