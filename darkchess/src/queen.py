@@ -188,5 +188,8 @@ class Queen(Piece):
                              " doesn't exist in the realm of this game")
 
     def copy(self):
+        """
+        Returns copy of Piece (pass by value not reference)
+        """
         new_piece = Queen(self.pos, self.team)
         return new_piece

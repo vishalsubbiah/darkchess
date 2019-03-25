@@ -10,6 +10,8 @@ import os
 
 def test_bishop_moves():
     """
+    Places 8 Bishops along two rows and plays 100 games with
+    random moves to test the mechanics.
     """
     num_games = 100
     num_moves = 300

@@ -35,5 +35,8 @@ class Dummy(Piece):
         return []
 
     def copy(self):
+        """
+        Returns copy of Piece (pass by value not reference)
+        """
         new_piece = Dummy(self.pos, self.team)
         return new_piece

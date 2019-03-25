@@ -135,5 +135,8 @@ class King(Piece):
         return False
 
     def copy(self):
+        """
+        Returns copy of Piece (pass by value not reference)
+        """
         new_piece = King(self.pos, self.team)
         return new_piece

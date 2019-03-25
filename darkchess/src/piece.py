@@ -63,5 +63,8 @@ class Piece(object):
         self.pos = pos
 
     def copy(self):
+        """
+        Returns copy of Piece (pass by value not reference)
+        """
         new_piece = Piece(self.pos, self.team)
         return new_piece

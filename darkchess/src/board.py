@@ -159,6 +159,9 @@ class Board(object):
                              " doesn't exist in the realm of this game")
 
     def copy(self):
+        """
+        Returns copy of Board (pass by value not reference)
+        """
         new_Board = Board()
         for i in range(8):
             for j in range(8):

@@ -10,6 +10,8 @@ import os
 
 def test_queen_moves():
     """
+    Places 16 Queens at random positions and plays 100 games with
+    random moves to test the mechanics.
     """
     num_games = 100
     num_moves = 300

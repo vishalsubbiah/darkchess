@@ -10,6 +10,8 @@ import os
 
 def test_knight_moves():
     """
+    Places 16 Knights at random positions and plays 100 games with
+    random moves to test the mechanics.
     """
     num_games = 100
     num_moves = 300

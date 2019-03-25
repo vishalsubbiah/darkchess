@@ -5,8 +5,10 @@ from darkchess.src.gamengine import GameEngine
 import os
 from mock import patch
 
+
 def test_normal_game():
     """
+    Plays 100 games with random moves to test the mechanics
     """
     num_games = 100
     num_moves = 300

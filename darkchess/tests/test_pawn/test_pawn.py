@@ -10,6 +10,7 @@ import os
 
 def no_pawns(board):
     """
+    Checks if no more pawns exist on the board
     """
     for i in range(8):
         for j in range(8):
@@ -20,9 +21,11 @@ def no_pawns(board):
 
 def test_pawn_moves():
     """
+    Places 8 Pawns along two rows and plays 100 games with
+    random moves to test the mechanics
     """
     num_games = 100
-    num_moves = 100
+    num_moves = 300
     for i in range(num_games):
         print("game", i+1)
         board = clean_board()
