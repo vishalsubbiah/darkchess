@@ -63,5 +63,5 @@ class Piece(object):
         self.pos = pos
 
     def copy(self):
-        new_piece = Piece(self.pos,self.team)
+        new_piece = Piece(self.pos, self.team)
         return new_piece

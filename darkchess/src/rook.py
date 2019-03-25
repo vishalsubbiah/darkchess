@@ -111,6 +111,7 @@ class Rook(Piece):
         else:
             raise ValueError("this team:"+self.team +
                              " doesn't exist in the realm of this game")
+
     def copy(self):
-        new_piece = Rook(self.pos,self.team)
+        new_piece = Rook(self.pos, self.team)
         return new_piece

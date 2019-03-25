@@ -133,6 +133,7 @@ class King(Piece):
         if (x1-x2)**2 + (y1-y2)**2 <= 2:
             return True
         return False
+
     def copy(self):
-        new_piece = King(self.pos,self.team)
+        new_piece = King(self.pos, self.team)
         return new_piece

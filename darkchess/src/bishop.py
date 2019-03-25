@@ -128,6 +128,7 @@ class Bishop(Piece):
             raise ValueError("this team:" +
                              self.team +
                              " doesn't exist in the realm of this game")
+
     def copy(self):
-        new_piece = Bishop(self.pos,self.team)
+        new_piece = Bishop(self.pos, self.team)
         return new_piece

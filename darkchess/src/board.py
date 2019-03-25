@@ -12,6 +12,7 @@ import numpy as np
 from darkchess.src.utils import clean_board
 from copy import copy
 
+
 class Board(object):
     """
     Layout of the game and pieces
@@ -161,7 +162,7 @@ class Board(object):
         new_Board = Board()
         for i in range(8):
             for j in range(8):
-                new_Board.board[i,j]=self.board[i,j].copy()
-                new_Board.board[i,j].set_position((i,j))
+                new_Board.board[i, j] = self.board[i, j].copy()
+                new_Board.board[i, j].set_position((i, j))
         new_Board.turn = copy(self.turn)
         return new_Board
