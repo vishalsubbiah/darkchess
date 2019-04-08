@@ -139,12 +139,26 @@ class Board(object):
             self.board[end] = self.board[start]
             self.board[start] = Dummy(start)
             self.board[end].set_position(end)
-
+            self.board[end].moved = True
         elif key_word == "enpasse":
             warnings.warn("enpasse not implemented yet")
 
         elif key_word == "castling":
-            warnings.warn("castling not implemented yet")
+            self.board[end] = self.board[start]
+            self.board[start] = Dummy(start)
+            self.board[end].set_position(end)
+            self.board[end].moved = True
+            x, y = end
+            if y == 2:
+                self.board[(x, 3)] = self.board[(x, 0)]
+                self.board[(x, 0)] = Dummy((x, 0))
+                self.board[(x, 3)].set_position((x, 3))
+                self.board[(x, 3)].moved = True
+            if y == 6:
+                self.board[(x, 5)] = self.board[(x, 7)]
+                self.board[(x, 7)] = Dummy((x, 7))
+                self.board[(x, 5)].set_position((x, 5))
+                self.board[(x, 5)].moved = True
 
         elif key_word == "evolve":
             self.board[end] = Queen(end, team)

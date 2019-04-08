@@ -115,4 +115,5 @@ class Knight(Piece):
         Returns copy of Piece (pass by value not reference)
         """
         new_piece = Knight(self.pos, self.team)
+        new_piece.moved = self.moved
         return new_piece

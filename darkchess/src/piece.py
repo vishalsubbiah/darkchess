@@ -14,6 +14,7 @@ class Piece(object):
         self.name = self.get_name()
         self.value = self.get_value()
         self.symbol = self.get_symbol()
+        self.moved = False
 
     def get_position(self):
         """
@@ -33,7 +34,7 @@ class Piece(object):
         """
         raise NotImplementedError("must be implemented")
 
-    def get_moves(self, board):
+    def get_moves(self, board, game_states):
         """
         All possible moves for this Piece
         Args:
@@ -67,4 +68,5 @@ class Piece(object):
         Returns copy of Piece (pass by value not reference)
         """
         new_piece = Piece(self.pos, self.team)
+        new_piece.moved = self.moved
         return new_piece

@@ -45,51 +45,55 @@ class King(Piece):
         all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(board)
         if self.team == "white":
             if(x+1 < 8):
-                if (x+1, y) not in all_opp_pos and not self.too_close((x+1, y), opp_king_pos):
+                if (x+1, y) not in all_opp_pos and not self.too_close((x+1, y), opp_king_pos) and board[(x+1, y)].team is None:
                     moves.append(((x, y), (x+1, y), 'base'))
                 if(y+1 < 8):
-                    if (x+1, y+1) not in all_opp_pos and not self.too_close((x+1, y+1), opp_king_pos):
+                    if (x+1, y+1) not in all_opp_pos and not self.too_close((x+1, y+1), opp_king_pos) and board[(x+1, y+1)].team is None:
                         moves.append(((x, y), (x+1, y+1), 'base'))
-                    if (x, y+1) not in all_opp_pos and not self.too_close((x, y+1), opp_king_pos):
+                    if (x, y+1) not in all_opp_pos and not self.too_close((x, y+1), opp_king_pos) and board[(x, y+1)].team is None:
                         moves.append(((x, y), (x, y+1), 'base'))
                 if(y > 0):
-                    if (x+1, y-1) not in all_opp_pos and not self.too_close((x+1, y-1), opp_king_pos):
+                    if (x+1, y-1) not in all_opp_pos and not self.too_close((x+1, y-1), opp_king_pos) and board[(x+1, y-1)].team is None:
                         moves.append(((x, y), (x+1, y-1), 'base'))
-                    if (x, y-1) not in all_opp_pos and not self.too_close((x, y-1), opp_king_pos):
+                    if (x, y-1) not in all_opp_pos and not self.too_close((x, y-1), opp_king_pos) and board[(x, y-1)].team is None:
                         moves.append(((x, y), (x, y-1), 'base'))
             if(x > 0):
-                if (x-1, y) not in all_opp_pos and not self.too_close((x-1, y), opp_king_pos):
+                if (x-1, y) not in all_opp_pos and not self.too_close((x-1, y), opp_king_pos) and board[(x-1, y)].team is None:
                     moves.append(((x, y), (x-1, y), 'base'))
                 if(y+1 < 8):
-                    if (x-1, y+1) not in all_opp_pos and not self.too_close((x-1, y+1), opp_king_pos):
+                    if (x-1, y+1) not in all_opp_pos and not self.too_close((x-1, y+1), opp_king_pos) and board[(x-1, y+1)].team is None:
                         moves.append(((x, y), (x-1, y+1), 'base'))
                 if(y > 0):
-                    if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos):
+                    if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos) and board[(x-1, y-1)].team is None:
                         moves.append(((x, y), (x-1, y-1), 'base'))
+
+            moves += self.castle_moves(board)
 
         elif self.team == "black":
             if(x+1 < 8):
-                if (x+1, y) not in all_opp_pos and not self.too_close((x+1, y), opp_king_pos):
+                if (x+1, y) not in all_opp_pos and not self.too_close((x+1, y), opp_king_pos) and board[(x+1, y)].team is None:
                     moves.append(((x, y), (x+1, y), 'base'))
                 if(y+1 < 8):
-                    if (x+1, y+1) not in all_opp_pos and not self.too_close((x+1, y+1), opp_king_pos):
+                    if (x+1, y+1) not in all_opp_pos and not self.too_close((x+1, y+1), opp_king_pos) and board[(x+1, y+1)].team is None:
                         moves.append(((x, y), (x+1, y+1), 'base'))
-                    if (x, y+1) not in all_opp_pos and not self.too_close((x, y+1), opp_king_pos):
+                    if (x, y+1) not in all_opp_pos and not self.too_close((x, y+1), opp_king_pos) and board[(x, y+1)].team is None:
                         moves.append(((x, y), (x, y+1), 'base'))
                 if(y > 0):
-                    if (x+1, y-1) not in all_opp_pos and not self.too_close((x+1, y-1), opp_king_pos):
+                    if (x+1, y-1) not in all_opp_pos and not self.too_close((x+1, y-1), opp_king_pos) and board[(x+1, y-1)].team is None:
                         moves.append(((x, y), (x+1, y-1), 'base'))
-                    if (x, y-1) not in all_opp_pos and not self.too_close((x, y-1), opp_king_pos):
+                    if (x, y-1) not in all_opp_pos and not self.too_close((x, y-1), opp_king_pos) and board[(x, y-1)].team is None:
                         moves.append(((x, y), (x, y-1), 'base'))
             if(x > 0):
-                if (x-1, y) not in all_opp_pos and not self.too_close((x-1, y), opp_king_pos):
+                if (x-1, y) not in all_opp_pos and not self.too_close((x-1, y), opp_king_pos) and board[(x-1, y)].team is None:
                     moves.append(((x, y), (x-1, y), 'base'))
                 if(y+1 < 8):
-                    if (x-1, y+1) not in all_opp_pos and not self.too_close((x-1, y+1), opp_king_pos):
+                    if (x-1, y+1) not in all_opp_pos and not self.too_close((x-1, y+1), opp_king_pos) and board[(x-1, y+1)].team is None:
                         moves.append(((x, y), (x-1, y+1), 'base'))
                 if(y > 0):
-                    if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos):
+                    if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos) and board[(x-1, y-1)].team is None:
                         moves.append(((x, y), (x-1, y-1), 'base'))
+
+            moves += self.castle_moves(board)
         else:
             raise ValueError("this team:"+self.team +
                              " doesn't exist in the realm of this game")
@@ -139,4 +143,16 @@ class King(Piece):
         Returns copy of Piece (pass by value not reference)
         """
         new_piece = King(self.pos, self.team)
+        new_piece.moved = self.moved
         return new_piece
+
+    def castle_moves(self, board):
+        x, y = self.get_position()  # y=4
+        # 8 positions
+        moves = []
+        all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(board)
+        if not self.moved and (x, y) not in all_opp_pos and not board[(x, 7)].moved and board[(x, 6)].team is None and board[(x, 5)].team is None and (x, 6) not in all_opp_pos and (x, 5) not in all_opp_pos and not self.too_close((x, 6), opp_king_pos) and not self.too_close((x, 5), opp_king_pos):
+            moves.append(((x, y), (x, y+2), 'castling'))
+        if not self.moved and (x, y) not in all_opp_pos and not board[(x, 0)].moved and board[(x, 1)].team is None and board[(x, 2)].team is None and (x, 1) not in all_opp_pos and (x, 2) not in all_opp_pos and not self.too_close((x, 1), opp_king_pos) and not self.too_close((x, 2), opp_king_pos):
+            moves.append(((x, y), (x, y-2), 'castling'))
+        return moves
