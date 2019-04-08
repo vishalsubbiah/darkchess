@@ -34,7 +34,7 @@ class Piece(object):
         """
         raise NotImplementedError("must be implemented")
 
-    def get_moves(self, board, game_states):
+    def get_moves(self, game_states):
         """
         All possible moves for this Piece
         Args:

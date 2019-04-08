@@ -25,7 +25,7 @@ class Dummy(Piece):
         """
         return "   "
 
-    def get_moves(self, board):
+    def get_moves(self, game_states):
         """
         All possible moves for this Piece
         Args:

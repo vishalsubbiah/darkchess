@@ -47,7 +47,7 @@ class GameEngine():
             pos: (i,j) on the board
         """
         piece = self.Board.board[pos]
-        return piece.get_moves(self.Board.board)
+        return piece.get_moves(self.game_states)
 
     def choose_move(self, move=None):
         """
@@ -134,8 +134,9 @@ class GameEngine():
         """
         Undos move (used if user chooses a move which maintains check on their king)
         """
+        self.game_states.pop()
         # self.Board = self.prev_Board.copy()
-        self.Board = self.game_states.pop()
+        self.Board = self.game_states[-1].copy()
 
     @staticmethod
     def num_alph(move_dict):
@@ -155,19 +156,20 @@ class GameEngine():
             new_dict[key] = [new_start, new_end]
         return new_dict
 
-    def _all_moves_minus_king(self, board, team):
+    def _all_moves_minus_king(self, game_states, team):
         """
         returns all moves except the team's king
         Args:
             board: numpy array of dtype Piece
             team: "white" or "black"
         """
+        board = game_states[-1].board
         all_moves_team = []
         king_pos = None
         for i in range(8):
             for j in range(8):
                 if board[i, j].team == team and board[i, j].get_symbol() != team[0]+"K ":
-                    all_moves_team += board[i, j].get_moves(board)
+                    all_moves_team += board[i, j].get_moves(game_states)
                 if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K ":
                     king_pos = (i, j)
         all_pos_team = []
@@ -180,9 +182,9 @@ class GameEngine():
         Checks if either team is in check
         """
         white_moves, wK_pos = self._all_moves_minus_king(
-            self.Board.board, "white")
+            self.game_states, "white")
         black_moves, bK_pos = self._all_moves_minus_king(
-            self.Board.board, "black")
+            self.game_states, "black")
         if bK_pos in white_moves:
             self.black_check = True
         else:

@@ -30,13 +30,14 @@ class Rook(Piece):
             raise ValueError("this team:"+self.team +
                              " doesn't exist in the realm of this game")
 
-    def get_moves(self, board):
+    def get_moves(self, game_states):
         """
         All possible moves for this Piece
         Args:
             board: numpy array of dtype Piece
         Returns list of moves (start_pos,end_pos,type_move)
         """
+        board = game_states[-1].board
         moves = []
         pos = self.get_position()
         x, y = pos[0], pos[1]

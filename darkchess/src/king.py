@@ -32,17 +32,18 @@ class King(Piece):
                              self.team +
                              " doesn't exist in the realm of this game")
 
-    def get_moves(self, board):
+    def get_moves(self, game_states):
         """
         All possible moves for this Piece
         Args:
             board: numpy array of dtype Piece
         Returns list of moves (start_pos,end_pos,type_move)
         """
+        board = game_states[-1].board
         moves = []
         x, y = self.get_position()
         # 8 positions
-        all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(board)
+        all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(game_states)
         if self.team == "white":
             if(x+1 < 8):
                 if (x+1, y) not in all_opp_pos and not self.too_close((x+1, y), opp_king_pos) and board[(x+1, y)].team is None:
@@ -67,7 +68,7 @@ class King(Piece):
                     if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos) and board[(x-1, y-1)].team is None:
                         moves.append(((x, y), (x-1, y-1), 'base'))
 
-            moves += self.castle_moves(board)
+            moves += self.castle_moves(game_states)
 
         elif self.team == "black":
             if(x+1 < 8):
@@ -93,18 +94,19 @@ class King(Piece):
                     if (x-1, y-1) not in all_opp_pos and not self.too_close((x-1, y-1), opp_king_pos) and board[(x-1, y-1)].team is None:
                         moves.append(((x, y), (x-1, y-1), 'base'))
 
-            moves += self.castle_moves(board)
+            moves += self.castle_moves(game_states)
         else:
             raise ValueError("this team:"+self.team +
                              " doesn't exist in the realm of this game")
         return moves
 
-    def _all_opp_moves_minus_king(self, board):
+    def _all_opp_moves_minus_king(self, game_states):
         """
         Returns all opponent moves except their king's moves
         Args:
             board: numpy array of dtype Piece
         """
+        board = game_states[-1].board
         opp_king_pos = None
         if self.team == "white":
             team = "black"
@@ -114,7 +116,7 @@ class King(Piece):
         for i in range(8):
             for j in range(8):
                 if board[i, j].team == team and board[i, j].get_symbol() != team[0]+"K ":
-                    all_moves_team += board[i, j].get_moves(board)
+                    all_moves_team += board[i, j].get_moves(game_states)
                 if board[i, j].team == team and board[i, j].get_symbol() == team[0]+"K ":
                     opp_king_pos = (i, j)
         all_pos_team = []
@@ -146,11 +148,12 @@ class King(Piece):
         new_piece.moved = self.moved
         return new_piece
 
-    def castle_moves(self, board):
+    def castle_moves(self, game_states):
+        board = game_states[-1].board
         x, y = self.get_position()  # y=4
         # 8 positions
         moves = []
-        all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(board)
+        all_opp_pos, opp_king_pos = self._all_opp_moves_minus_king(game_states)
         if not self.moved and (x, y) not in all_opp_pos and not board[(x, 7)].moved and board[(x, 6)].team is None and board[(x, 5)].team is None and (x, 6) not in all_opp_pos and (x, 5) not in all_opp_pos and not self.too_close((x, 6), opp_king_pos) and not self.too_close((x, 5), opp_king_pos):
             moves.append(((x, y), (x, y+2), 'castling'))
         if not self.moved and (x, y) not in all_opp_pos and not board[(x, 0)].moved and board[(x, 1)].team is None and board[(x, 2)].team is None and (x, 1) not in all_opp_pos and (x, 2) not in all_opp_pos and not self.too_close((x, 1), opp_king_pos) and not self.too_close((x, 2), opp_king_pos):
