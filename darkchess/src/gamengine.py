@@ -57,6 +57,7 @@ class GameEngine():
         """
         team, player = self.get_turn()
         print(team + " to play")
+        self.is_stalemate_no_move(team)
         if player == "human":
             print("choose a piece (once chosen have to play that piece)")
             if move is not None:
@@ -241,3 +242,18 @@ class GameEngine():
             if team == "black":
                 print("white wins")
                 sys.exit(0)
+
+    def is_stalemate_no_move(self, team):
+        moves = self.all_moves()
+        game_over=False
+        if len(moves) == 0:
+            if team == "white":
+                if not self.white_check:
+                    game_over=True
+            if team == "black":
+                if not self.black_check:
+                    game_over=True
+        if game_over:
+            print("game is a stalemate")
+            print(str(team)+" has no more moves and not in check")
+            sys.exit(0)
