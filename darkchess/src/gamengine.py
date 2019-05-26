@@ -58,6 +58,7 @@ class GameEngine():
         team, player = self.get_turn()
         print(team + " to play")
         self.is_stalemate_no_move(team)
+        self.is_stalemate_3states(team)
         if player == "human":
             print("choose a piece (once chosen have to play that piece)")
             if move is not None:
@@ -245,15 +246,39 @@ class GameEngine():
 
     def is_stalemate_no_move(self, team):
         moves = self.all_moves()
-        game_over=False
+        game_over = False
         if len(moves) == 0:
             if team == "white":
                 if not self.white_check:
-                    game_over=True
+                    game_over = True
             if team == "black":
                 if not self.black_check:
-                    game_over=True
+                    game_over = True
         if game_over:
             print("game is a stalemate")
             print(str(team)+" has no more moves and not in check")
             sys.exit(0)
+
+    def compare_states(self, S, T):
+        return np.array_equal(S, T)
+
+    def is_stalemate_3states(self, team):
+        if len(self.game_states) >= 9:
+            S1 = self.game_states[-9]
+            S2 = self.game_states[-8]
+            S3 = self.game_states[-7]
+            S4 = self.game_states[-6]
+            T1 = self.game_states[-5]
+            T2 = self.game_states[-4]
+            T3 = self.game_states[-3]
+            T4 = self.game_states[-2]
+            R1 = self.game_states[-1]
+            ans1 = self.compare_states(S1, T1)
+            ans2 = self.compare_states(S2, T2)
+            ans3 = self.compare_states(S3, T3)
+            ans4 = self.compare_states(S4, T4)
+            ans5 = self.compare_states(T1, R1)
+            if ans1 and ans2 and ans3 and ans4 and ans5:
+                print("game is a stalemate")
+                print("Both teams made the same moves ")
+                sys.exit(0)
