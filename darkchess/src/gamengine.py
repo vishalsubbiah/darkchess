@@ -20,7 +20,6 @@ class GameEngine():
         """
         self.move_counter = 0
         self.Board = Board
-        # self.prev_Board = Board.copy()
         self.game_states = [self.Board.copy()]
         if player1 is None:
             player1 = "human"
@@ -80,7 +79,6 @@ class GameEngine():
                         move_dict[i+1] = pos_move
                     print(self.num_alph(move_dict))
                     option = input("move:")
-                    # self.prev_Board = self.Board.copy()
                     self.Board.update_board(move_dict[int(option)], team)
                     self.game_states.append(self.Board.copy())
                     self.is_check()
@@ -108,7 +106,6 @@ class GameEngine():
         elif player == "computer":
             if move is None:
                 raise ValueError("Move is None, cant be in computer mode")
-            # self.prev_Board = self.Board.copy()
             self.Board.update_board(move, team)
             self.game_states.append(self.Board.copy())
             self.is_check()
@@ -260,7 +257,7 @@ class GameEngine():
             sys.exit(0)
 
     def compare_states(self, S, T):
-        return np.array_equal(S, T)
+        return S.equal(T)
 
     def is_stalemate_3states(self, team):
         if len(self.game_states) >= 9:

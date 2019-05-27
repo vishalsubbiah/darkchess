@@ -183,3 +183,16 @@ class Board(object):
                 new_Board.board[i, j].set_position((i, j))
         new_Board.turn = copy(self.turn)
         return new_Board
+
+    def equal(self, board):
+        """
+        board: Board object
+        Returns True if both Boards are having pieces in the same position, otherwise false 
+        """
+        is_equal = True
+        for i in range(8):
+            for j in range(8):
+                if self.board[i, j].symbol != board.board[i, j].symbol:
+                    is_equal = False
+                    return is_equal
+        return is_equal
