@@ -5,7 +5,6 @@ from darkchess.src.pawn import Pawn
 from darkchess.src.dummy_piece import Dummy
 from darkchess.src.gamengine import GameEngine
 from darkchess.src.utils import clean_board
-import os
 
 
 def no_pawns(board):

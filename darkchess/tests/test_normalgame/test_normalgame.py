@@ -2,7 +2,6 @@ import pytest
 import numpy as np
 from darkchess.src.board import Board
 from darkchess.src.gamengine import GameEngine
-import os
 from mock import patch
 
 

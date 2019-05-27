@@ -34,7 +34,7 @@ class Queen(Piece):
         """
         All possible moves for this Piece
         Args:
-            board: numpy array of dtype Piece
+            game_states: list of numpy array of dtype Piece - each element is a board
         Returns list of moves (start_pos,end_pos,type_move)
         """
         board = game_states[-1].board

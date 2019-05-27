@@ -5,7 +5,6 @@ from darkchess.src.bishop import Bishop
 from darkchess.src.dummy_piece import Dummy
 from darkchess.src.gamengine import GameEngine
 from darkchess.src.utils import clean_board
-import os
 
 
 def test_bishop_moves():

@@ -38,7 +38,7 @@ class Piece(object):
         """
         All possible moves for this Piece
         Args:
-            board: numpy array of dtype Piece
+            game_states: list of numpy array of dtype Piece - each element is a board
         Returns list of moves (start_pos,end_pos,type_move)
         """
         raise NotImplementedError("must be implemented")

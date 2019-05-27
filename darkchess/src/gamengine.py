@@ -53,7 +53,7 @@ class GameEngine():
         """
         how the user/computer plays the game
         Args:
-            move: move (start_pos,end_pos,type_move) to execute if valid
+            move: move (start_pos, end_pos, type_move) to execute if valid
         """
         team, player = self.get_turn()
         print(team + " to play")
@@ -162,7 +162,7 @@ class GameEngine():
         """
         returns all moves except the team's king
         Args:
-            board: numpy array of dtype Piece
+            game_states: list of numpy array of dtype Piece - each element is a board
             team: "white" or "black"
         """
         board = game_states[-1].board
