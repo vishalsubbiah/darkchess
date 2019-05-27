@@ -39,7 +39,6 @@ def test_stalemate_nomoves():
     game = GameEngine(pawn_board, player1="computer", player2="computer")
     with pytest.raises(SystemExit):
         for _ in range(2):
-            game.Board.view_board()
             moves = game.all_moves()
             if len(moves) > 0:
                 game.choose_move(moves[0])

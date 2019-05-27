@@ -141,7 +141,12 @@ class Board(object):
             self.board[end].set_position(end)
             self.board[end].moved = True
         elif key_word == "enpasse":
-            warnings.warn("enpasse not implemented yet")
+            self.board[end] = self.board[start]
+            self.board[start] = Dummy(start)
+            self.board[end].set_position(end)
+            self.board[end].moved = True
+            self.board[(start[0], end[1])] = Dummy(start)
+            # warnings.warn("enpasse not implemented yet")
 
         elif key_word == "castling":
             self.board[end] = self.board[start]
