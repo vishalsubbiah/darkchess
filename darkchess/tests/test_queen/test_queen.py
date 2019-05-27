@@ -2,7 +2,6 @@ import pytest
 import numpy as np
 from darkchess.src.board import Board
 from darkchess.src.queen import Queen
-from darkchess.src.dummy_piece import Dummy
 from darkchess.src.gamengine import GameEngine
 from darkchess.src.utils import clean_board
 
