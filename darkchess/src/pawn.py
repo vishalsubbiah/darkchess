@@ -64,13 +64,13 @@ class Pawn(Piece):
                     if board[x+1, y-1].team is "black":
                         moves.append((pos, (x+1, y-1), 'base'))
                     if len(game_states) >= 2:
-                        if board[x, y-1].team is "black" and game_states[-2].board[x+2, y-1].team is "black":
+                        if board[x, y-1].symbol == "bp " and game_states[-2].board[x+2, y-1].symbol == "bp ":
                             moves.append((pos, (x+1, y-1), 'enpasse'))
                 if y+1 < 8:
                     if board[x+1, y+1].team is "black":
                         moves.append((pos, (x+1, y+1), 'base'))
                     if len(game_states) >= 2:
-                        if board[x, y+1].team is "black" and game_states[-2].board[x+2, y+1].team is "black":
+                        if board[x, y+1].symbol == "bp " and game_states[-2].board[x+2, y+1].symbol == "bp ":
                             moves.append((pos, (x+1, y+1), 'enpasse'))
                 return moves
 
@@ -121,13 +121,13 @@ class Pawn(Piece):
                     if board[x-1, y-1].team is "white":
                         moves.append((pos, (x-1, y-1), 'base'))
                     if len(game_states) >= 2:
-                        if board[x, y-1].team is "white" and game_states[-2].board[x-2, y-1].team is "white":
+                        if board[x, y-1].symbol == "wp " and game_states[-2].board[x-2, y-1].symbol == "wp ":
                             moves.append((pos, (x-1, y-1), 'enpasse'))
                 if y+1 < 8:
                     if board[x-1, y+1].team is "white":
                         moves.append((pos, (x-1, y+1), 'base'))
                     if len(game_states) >= 2:
-                        if board[x, y+1].team is "white" and game_states[-2].board[x-2, y+1].team is "white":
+                        if board[x, y+1].symbol == "wp " and game_states[-2].board[x-2, y+1].symbol == "wp ":
                             moves.append((pos, (x-1, y+1), 'enpasse'))
                 return moves
 

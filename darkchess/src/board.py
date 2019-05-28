@@ -146,7 +146,6 @@ class Board(object):
             self.board[end].set_position(end)
             self.board[end].moved = True
             self.board[(start[0], end[1])] = Dummy(start)
-            # warnings.warn("enpasse not implemented yet")
 
         elif key_word == "castling":
             self.board[end] = self.board[start]
@@ -192,7 +191,7 @@ class Board(object):
     def equal(self, board):
         """
         board: Board object
-        Returns True if both Boards are having pieces in the same position, otherwise false 
+        Returns True if both Boards are having pieces in the same position, otherwise false
         """
         is_equal = True
         for i in range(8):

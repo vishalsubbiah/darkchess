@@ -13,7 +13,6 @@ def test_enpasse():
     board[1, 5] = Pawn((1, 5), "white")
     pawn_board = Board(board)
     game = GameEngine(pawn_board, player1="computer", player2="computer")
-
     moves = game.all_moves()
     game.choose_move(moves[1])
     moves = game.all_moves()
