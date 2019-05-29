@@ -242,6 +242,11 @@ class GameEngine():
                 sys.exit(0)
 
     def is_stalemate_no_move(self, team):
+        """
+        Checks if game is at stalemate because no moves exist and its not checkmate
+        Args:
+            team: "white" or "black"
+        """
         moves = self.all_moves()
         game_over = False
         if len(moves) == 0:
@@ -257,9 +262,20 @@ class GameEngine():
             sys.exit(0)
 
     def compare_states(self, S, T):
+        """
+        Checks if given two states are identical
+        Args:
+            S: game state
+            T: game state
+        """
         return S.equal(T)
 
     def is_stalemate_3states(self, team):
+        """
+        Checks if game is at stalemate because the last 3 moves were resulting in the same game state
+        Args:
+            team: "white" or "black"
+        """
         if len(self.game_states) >= 9:
             S1 = self.game_states[-9]
             S2 = self.game_states[-8]

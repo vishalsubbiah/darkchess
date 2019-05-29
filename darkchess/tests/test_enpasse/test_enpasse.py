@@ -6,6 +6,9 @@ from darkchess.src.utils import clean_board
 
 
 def test_enpasse():
+    """
+    checks if white and black pawns can do enpasse
+    """
     board = clean_board()
     board[3, 2] = Pawn((3, 2), "white")
     board[6, 1] = Pawn((6, 1), "black")

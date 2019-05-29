@@ -9,6 +9,7 @@ from darkchess.src.utils import clean_board
 
 def test_stalemate_3moves():
     """
+    Checks if the stalemate function works when the same state is repeated 3 times
     """
     board = clean_board()
     board[3, 4] = Knight((3, 4), "white")
@@ -29,7 +30,7 @@ def test_stalemate_3moves():
 
 def test_stalemate_nomoves():
     """
-    Two pawns blocking each other.
+    Two pawns blocking each other, no more moves so stalemate check
     """
     board = clean_board()
     board[3, 4] = Pawn((3, 4), "white")

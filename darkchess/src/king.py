@@ -149,6 +149,11 @@ class King(Piece):
         return new_piece
 
     def castle_moves(self, game_states):
+        """
+        Returns castling moves
+        Args:
+            board: numpy array of dtype Piece
+        """
         board = game_states[-1].board
         x, y = self.get_position()  # y=4
         # 8 positions
