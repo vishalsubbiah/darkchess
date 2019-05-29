@@ -162,7 +162,7 @@ class GameEngine():
             game_states: list of numpy array of dtype Piece - each element is a board
             team: "white" or "black"
         """
-        board = game_states[-1].board
+        board = self.Board.board
         all_moves_team = []
         king_pos = None
         for i in range(8):

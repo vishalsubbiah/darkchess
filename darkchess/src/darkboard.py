@@ -57,10 +57,11 @@ class DarkBoard(Board):
         team = self.turn
         all_moves_team = []
         all_pos_team = []
+        game_state = [Board(self.board)]
         for i in range(8):
             for j in range(8):
                 if self.board[i, j].team == team:
-                    all_moves_team += self.board[i, j].get_moves(self.board)
+                    all_moves_team += self.board[i, j].get_moves(game_state)
                     all_pos_team.append((i, j))
         for move in all_moves_team:
             all_pos_team.append(move[1])
