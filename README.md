@@ -3,7 +3,7 @@
 
 Dark chess is a python package which has all the functionality of the game chess, with also a dark mode, where the player can only view the tiles of the board they are currently on or can move to.
 
-This is an early version of the package. There are still bugs which are being worked on. 
+This is an early version of the package. There are still bugs which are being worked on.
 
 #### To install:
 ```
